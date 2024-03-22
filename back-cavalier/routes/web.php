@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +16,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
-Route::get('/login', [AuthController::class,'connexion'])->name('auth.connexion');
-Route::post('/signup', [AuthController::class,'signup'])->name('signup');
-Route::post('/signin', [AuthController::class,'signin'])->name('signin');
+Route::post('/inscription', [AuthController::class,'signup'])->name('signup');
+Route::get('/', [AuthController::class,'connexion'])->name('auth.login');
+Route::post('/connexion', [AuthController::class,'signin'])->name('signin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+Route::get('/home', [HomeController::class,'index'])->name('home');
+Route::get('/dashboard', [CategorieController::class, 'index'])->name('dashboard');
+Route::get('/categories', [CategorieController::class, 'index'])->name('categories.index');
+Route::post('/categories', [CategorieController::class, 'store'])->name('categories.store');
+Route::put('/categories/{categorie}', [CategorieController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{categorie}', [CategorieController::class, 'destroy'])->name('categories.destroy');
 
 Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 Route::post('/forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');

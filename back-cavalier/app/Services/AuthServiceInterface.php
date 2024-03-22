@@ -4,7 +4,7 @@ namespace App\Services;
 
 interface AuthServiceInterface
 {
-    public function createUser($request);
+    public function createUser(array $userData);
 
     public function blockUser($userId);
 }
