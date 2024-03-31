@@ -11,10 +11,10 @@
     <meta name="description"
         content="Flexy Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>Evento</title>
+    <title>Cavalier</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
 
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('dashstyle/img/logo/logo.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('styyle/img/tbourida-4.png') }}" />
 
     <link href="{{ asset('dashstyle/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashstyle/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}"
@@ -48,11 +48,16 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header" data-logobg="skin6">
 
-                    <a class="navbar-brand" href="{{ route('home') }}">
+                    {{-- <a href="" class="text-decoration-none ml-4">
 
-                        <b class="logo-icon">
+                        <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo"  width="40" />
+                        <span class="h2 text-uppercase text-dark bg-primary px-2 ml-n1">lecavalier</span>
+                    </a> --}}
+                    <a class="navbar-brand " href="{{ route('home') }}">
+                        <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo"  width="30%" />
+                        <b class="text-decoration-none m-1">
 
-                            <img src="{{ asset('dashstyle/img/logo/logo.png') }}" alt="homepage" class="dark-logo" />
+                            <img src="{{ asset('styyle/img/logo.png') }}" alt="homepage" width="110%" height="60" class="dark-logo" />
                         </b>
 
 
@@ -113,7 +118,7 @@
 
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
+            <div class="scroll-sidebar mt-3">
 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
@@ -123,14 +128,14 @@
                                     class="hide-menu">categories</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index')}}"
                                 aria-expanded="false"><i class="mdi mdi-account-network"></i><span
                                     class="hide-menu">utilisateur</span></a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
                                 <i class="mdi mdi-bell"></i>
-                                <span class="hide-menu">Requests</span>
+                                <span class="hide-menu">evenements</span>
                             </a>
                         </li>
 
@@ -150,8 +155,8 @@
         <div class="page-wrapper">
 
             @yield('category')
-            {{-- @yield('user')
-            @yield('approved')
+            @yield('user')
+            {{-- @yield('approved')
             @yield('statistique') --}}
 
             <div class="container-fluid">

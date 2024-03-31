@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,8 +24,10 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('styyle/css/style.css')}}" rel="stylesheet">
-</head>
+</head> --}}
+@extends('layaout.navbar')
 
+@section('home')
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
@@ -79,8 +81,8 @@
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">lecav</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">alier</span>
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
@@ -1004,7 +1006,9 @@
             </div>
         </div>
     </div>
-    <!-- Footer End -->
+
+    @endsection
+    {{-- <!-- Footer End -->
 
 
     <!-- Back to Top -->
@@ -1025,4 +1029,4 @@
     <script src="{{ asset('styyle/js/main.js')}}"></script>
 </body>
 
-</html>
+</html> --}}

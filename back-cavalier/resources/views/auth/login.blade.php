@@ -18,7 +18,13 @@
         {{ Session::get('error') }}
     </div>
 @endif
-    <h2>Le Cavalier</h2>
+
+<div class="containerr">
+    <div class="flex-containerr">
+        <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo" class="rounded-circle" width="80" />
+        <h2 class="titlee">Le Cavalier</h2>
+    </div>
+</div>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="{{ route('signup') }}" method="POST">

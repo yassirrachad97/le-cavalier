@@ -3,6 +3,7 @@
 
     <div class="container">
         <div class="row">
+
             @foreach($users as $user)
             <div class="col-lg-3 col-md-4 col-sm-6 ">
                 <div class="card m-3 gap-4" style="width: 16rem;">
@@ -18,27 +19,25 @@
                             </ul>
                         </div>
                         <div class="team-caption">
-                            <h3><a href="#">{{ $user->name }}</a></h3>
+                            <h3><a href="#">{{ $user->first_name }}.{{ $user->last_name }}</a></h3>
 
-                            <p>{{ $user->role->name }}</p>
+                            <p class="badge badge-warning">{{ $user->role->name}}</p>
                             <form action="{{ route('changeRole') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="user" value="{{ $user->id }}">
                                 <select name="role" id="role" class="form-control" required>
-                                    <option value=1>utilisateur</option>
-                                    <option value=2>organisateur</option>
-                                    <option value=3>admin</option>
+                                    <option value='2'>utilisateur</option>
+                                    <option value='1'>admin</option>
                             </select>
                             <button type="submit" class="btn btn-primary mt-1">changer</button>
                             @if($user->is_blocked == 0)
-                              <a href="{{ route('blocked' ,$user->id) }}" type="submit" class="btn btn-danger mt-1">bloquer</a>
+                              <a href="{{ route('blockUser' ,$user->id) }}" type="submit" class="btn btn-danger mt-1">bloquer</a>
                             @else
-                            <a href="{{ route('blocked' ,$user->id) }}" type="submit" class="btn btn-danger mt-1">débloquer</a>
+                            <a href="{{ route('blockUser' ,$user->id) }}" type="submit" class="btn btn-danger mt-1">débloquer</a>
                             @endif
                             </form>
 
-                            <!-- Assuming you have a role field in your User model -->
-                            <!-- You can add more user details here if needed -->
+
                         </div>
                     </div>
                 </div>

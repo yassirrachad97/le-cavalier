@@ -1,30 +1,29 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> Evento</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <title>MultiShop - Online Shop Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
-	<!-- CSS here -->
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/owl.carousel.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/slicknav.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mystyle/css/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mystyle/css/gijgo.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/animate.min.cs')}}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/magnific-popup.css')}}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/fontawesome-all.min.css')}}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/themify-icons.css')}}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/slick.css')}}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/nice-select.css')}}">
-	<link rel="stylesheet" href="{{ asset('css/mystyle/css/style.css') }}">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ asset('styyle/lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('styyle/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset('styyle/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
     <!--? Preloader Start -->
@@ -39,7 +38,7 @@
         </div>
     </div>
     <!-- Preloader Start -->
-    <header>
+    {{-- <header>
         <!--? Header Start -->
         <div class="header-area">
             <div class="main-header header-sticky">
@@ -106,54 +105,33 @@
             </div>
         </div>
         <!-- Header End -->
-    </header>
+    </header> --}}
 
 
 @yield('home')
 @yield('detail')
 @yield('content')
-@yield('reservation')
+@yield('')
 
-  <!-- JS here -->
+  <!-- Footer End -->
 
-  <script src="{{ asset('css/mystyle/js/vendor/modernizr-3.5.0.min.js') }}"></script>
-  <!-- Jquery, Popper, Bootstrap -->
-  <script src="{{ asset('css/mystyle/js/vendor/jquery-1.12.4.min.js') }}"></script>
-  <script src="{{ asset('css/mystyle/js/popper.min.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/bootstrap.min.js')}}"></script>
-  <!-- Jquery Mobile Menu -->
-  <script src="{{ asset('css/mystyle/js/jquery.slicknav.min.js')}}"></script>
 
-  <!-- Jquery Slick , Owl-Carousel Plugins -->
-  <script src="{{ asset('css/mystyle/js/owl.carousel.min.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/slick.min.js')}}"></script>
-  <!-- One Page, Animated-HeadLin -->
-  <script src="{{ asset('css/mystyle/js/wow.min.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/animated.headline.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/jquery.magnific-popup.js')}}"></script>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-  <!-- Date Picker -->
-  <script src="{{ asset('css/mystyle/js/gijgo.min.js')}}"></script>
-  <!-- Nice-select, sticky -->
-  <script src="{{ asset('css/mystyle/js/jquery.nice-select.min.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/jquery.sticky.js')}}"></script>
 
-  <!-- counter , waypoint -->
-  <script src="{{ asset('css/mystyle/js/jquery.counterup.min.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/waypoints.min.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/jquery.countdown.min.js')}}"></script>
-  <!-- contact js -->
-  <script src="{{ asset('css/mystyle/js/contact.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/jquery.form.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/jquery.validate.min.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/mail-script.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/jquery.ajaxchimp.min.js')}}"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('styyle/lib/easing/easing.min.js')}}"></script>
+    <script src="{{ asset('styyle/lib/owlcarousel/owl.carousel.min.js')}}"></script>
 
-  <!-- Jquery Plugins, main Jquery -->
-  <script src="{{ asset('css/mystyle/js/plugins.js')}}"></script>
-  <script src="{{ asset('css/mystyle/js/main.js')}}"></script>
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- Template Javascript -->
+    <script src="{{ asset('styyle/js/main.js')}}"></script>
 </body>
+
 </html>
