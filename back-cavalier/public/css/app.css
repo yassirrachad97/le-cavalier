@@ -289,5 +289,21 @@ select option {
     background-color: #fff;
 }
 
+.containerr {
+    width: 100%;
+    max-width: 45vh; /* Ajustez selon vos besoins */
+    margin: 0 auto;
+
+}
+
+.flex-containerr {
+    display: flex;
+    align-items: center;
+}
+
+.titlee {
+    margin-top: 40px;
+}
+
 
 

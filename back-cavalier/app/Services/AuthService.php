@@ -6,16 +6,16 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService implements AuthServiceInterface
-
 {
-    public function createUser( $request)
+   public function createUser(array $userData)
     {
         User::create([
-            "first-name" => $request['first-name'],
-            "last-name" => $request['last-name'],
-            "email" => $request["email"],
-            "phone" => $request["phone"],
-            "password" => Hash::make($request['password'])
+            'first_name' => $userData['first_name'],
+            'last_name' => $userData['last_name'],
+            'email' => $userData['email'],
+            'phone' => $userData['phone'],
+            'password' => Hash::make($userData['password']),
+            'role_id' => 2,
         ]);
     }
 

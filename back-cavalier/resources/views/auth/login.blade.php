@@ -11,11 +11,23 @@
     <div class="alert alert-success">
         {{ Session::get('success') }}
     </div>
-    @endif
-    <h2>Le Cavalier</h2>
+@endif
+
+@if(Session::has('error'))
+    <div class="alert alert-danger">
+        {{ Session::get('error') }}
+    </div>
+@endif
+
+<div class="containerr">
+    <div class="flex-containerr">
+        <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo" class="rounded-circle" width="80" />
+        <h2 class="titlee">Le Cavalier</h2>
+    </div>
+</div>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="{{ route('signup') }}" method="post">
+            <form action="{{ route('signup') }}" method="POST">
                 @csrf
                 <h1>Create Account</h1>
                 <div class="social-container">
@@ -23,18 +35,35 @@
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <div class="m-2">
-                <span>or use your email for registration</span>
-                <input type="text" name="first-name" placeholder="first Name" />
-                <input type="text" name="last-name" placeholder="last Name" />
-                <input type="email" name="email" placeholder="Email" />
-                <input type="password" name="password" placeholder="Password" />
-            </div>
-                <button>Sign Up</button>
+                <div class="input-container">
+                    <input type="text" name="first_name" placeholder="First Name" />
+                    <input type="text" name="last_name" placeholder="Last Name" />
+                    <input type="text" name="phone" placeholder="Phone" />
+                    <input type="email" name="email" placeholder="Email" />
+                    <input type="password" name="password" placeholder="Password" />
+                </div>
+                <div class="error-container">
+                    @error('first_name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    @error('last_name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    @error('phone')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    @error('email')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    @error('password')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="{{ route('signin') }}" method="post">
+            <form action="{{ route('signin') }}" method="POST">
                 @csrf
                 <h1>Sign in</h1>
                 <div class="social-container">
@@ -42,11 +71,12 @@
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <span>or use your account</span>
-                <input type="email" name="email" placeholder="Email" />
-                <input type="password" name="password" placeholder="Password" />
+                <div class="input-container">
+                    <input type="email" name="email" placeholder="Email" />
+                    <input type="password" name="password" placeholder="Password" />
+                </div>
                 <a href="{{ route('forget.password.get') }}">Forgot your password?</a>
-                <button>Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="overlay-container">

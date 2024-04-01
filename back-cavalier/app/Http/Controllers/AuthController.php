@@ -9,34 +9,39 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    protected $Authservice;
+    protected $AuthService;
 
-    public function __construct(AuthServiceInterface $Authservice)
+    public function __construct(AuthServiceInterface $AuthService)
     {
-        $this->Authservice = $Authservice;
+        $this->AuthService = $AuthService;
+
     }
 
     public function connexion()
     {
         return view('auth.login');
+
     }
 
-    public function signup(Request $request)
+
+    public function signup()
     {
-        $validated = $request->validate([
-            'first-name' => 'required|string|min:2|max:12',
-            'last-name' => 'required|string|min:2|max:12',
+        $validated = request()->validate([
+            'first_name' => 'required|string|min:2|max:12',
+            'last_name' => 'required|string|min:2|max:12',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|numeric|digits:10|unique:users,phone',
-            'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required|string|unique:users,phone',
+            'password' => 'required',
         ]);
 
-        $this->Authservice->createUser($validated);
+
+
+        $this->AuthService->createUser($validated);
+
 
         Session::flash('success', 'Account created successfully!');
-        return redirect()->route('auth.connexion');
+        return redirect()->route('auth.login');
     }
-
     public function signin(Request $request)
     {
         $validated = $request->validate([
@@ -50,7 +55,7 @@ class AuthController extends Controller
             if ($user->is_blocked) {
                 Auth::logout();
                 Session::flash('error', 'Votre compte est bloqué.');
-                return redirect('/login');
+                return redirect()->route('auth.connexion');
             }
 
             request()->session()->regenerate();
@@ -69,13 +74,5 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('auth.connexion');
-    }
-
-    public function blockUser($userId)
-    {
-
-        $this->Authservice->blockUser($userId);
-
-        return redirect()->back();
     }
 }
