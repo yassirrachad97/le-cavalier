@@ -16,8 +16,6 @@ class Annonces extends Model
         'user_id',
         'annonceable_id',
         'annonceable_type',
-        'categories_id',
-        'image_id',
         'city_id',
         'price',
         'approuved',
@@ -33,7 +31,14 @@ class Annonces extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function categorie(){
-        return $this->belongsTo(Categories::class);
+    public function city(){
+        return $this->belongsTo(City::class);
     }
+
+    public function images()
+    {
+        return $this->hasMany(Images::class);
+    }
+
+
 }

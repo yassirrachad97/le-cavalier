@@ -7,10 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horses extends Model
 {
-    protected $fillable = ['name', 'age', 'color','pidegrée','category_id'];
+    use HasFactory;
+    protected $fillable =
+    ['name',
+     'age',
+      'color',
+      'pidegrée',
+      'category_id'];
 
     public function annonces()
     {
         return $this->morphMany('App\Annonce', 'annonceable');
+    }
+    public function categorie(){
+        return $this->belongsTo(Categories::class);
     }
 }

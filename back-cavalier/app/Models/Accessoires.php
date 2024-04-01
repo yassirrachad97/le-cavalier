@@ -7,10 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accessoires extends Model
 {
-    protected $fillable = ['type', 'name', 'category_id'];
+    use HasFactory;
+    protected $fillable =
+    ['type',
+     'name',
+     'category_id'];
 
     public function annonces()
     {
         return $this->morphMany('App\Annonce', 'annonceable');
+    }
+    public function categorie(){
+        return $this->belongsTo(Categories::class);
     }
 }
