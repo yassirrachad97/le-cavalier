@@ -17,7 +17,7 @@ class Horses extends Model
 
     public function annonces()
     {
-        return $this->morphMany('App\Annonce', 'annonceable');
+        return $this->morphOne(Annonces::class, 'annonceable');
     }
     public function categorie(){
         return $this->belongsTo(Categories::class);
