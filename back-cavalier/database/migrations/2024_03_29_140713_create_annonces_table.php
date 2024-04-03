@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->text('description');
             $table->string('phone_appel');
-            $table->string('phone_wathsapp');
+            $table->string('phone_wathsapp')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->morphs('annonceable');
-            $table->foreignId('image_id')->nullable()->constrained('images');
+            $table->string('cover');
             $table->foreignId('city_id')->constrained('cities');
             $table->decimal('price', 10, 2);
             $table->boolean('approuved')->default(false);

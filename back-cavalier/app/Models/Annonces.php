@@ -14,6 +14,7 @@ class Annonces extends Model
         'phone_appel',
         'phone_wathsapp',
         'user_id',
+        'cover',
         'annonceable_id',
         'annonceable_type',
         'city_id',
