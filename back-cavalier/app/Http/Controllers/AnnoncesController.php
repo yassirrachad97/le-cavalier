@@ -45,6 +45,8 @@ class AnnoncesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+
     public function store(Request $request)
     {
 
@@ -70,43 +72,41 @@ class AnnoncesController extends Controller
             'price' => $validatedData['price'],
             'approuved' => 0,
         ]);
-        $this->setAnnonceableAttributes($annonce, $validatedData);
-        $this->addImagesToAnnonce($annonce, $request);
 
+
+    if ($validatedData['annonceable_type'] === 'horse') {
+        $horse = Horses::create([
+            'name' => $validatedData['horse_name'],
+            'age' => $validatedData['horse_age'],
+            'color' => $validatedData['horse_color'],
+            'pedigree' => $validatedData['horse_pedigree'],
+            'category_id' => $validatedData['category_id'],
+        ]);
+
+        $annonce->annonceable()->associate($horse);
+    } elseif ($validatedData['annonceable_type'] === 'accessoire') {
+        $accessoire = Accessoires::create([
+            'type' => $validatedData['accessoire_type'],
+            'name' => $validatedData['accessoire_name'],
+            'category_id' => $validatedData['category_id'],
+        ]);
+
+        $annonce->annonceable()->associate($accessoire);
+    }
         $annonce->save();
 
-        return redirect()->route('annonces.index')->with('success', 'Annonce ajoutée avec succès.');
-    }
-
-    private function setAnnonceableAttributes($annonce, $validatedData)
-    {
-        if ($validatedData['annonceable_type'] == 'horse') {
-            $horse = Horses::find($validatedData['annonceable_id']);
-            $annonce->annonceable()->associate($horse);
-            $annonce->name = $horse->name;
-            $annonce->age = $horse->age;
-            $annonce->color = $horse->color;
-            $annonce->pidegrée = $horse->pidegrée;
-            $annonce->category_id = $horse->category_id;
-        } elseif ($validatedData['annonceable_type'] == 'accessoire') {
-            $accessoire = Accessoires::find($validatedData['annonceable_id']);
-            $annonce->annonceable()->associate($accessoire);
-            $annonce->type = $accessoire->type;
-            $annonce->name = $accessoire->name;
-            $annonce->category_id = $accessoire->category_id;
-        }
-    }
-
-    private function addImagesToAnnonce($annonce, $request)
-    {
         if ($request->hasFile('images')) {
-            $images = $request->file('images');
-            foreach ($images as $image) {
+            foreach ($request->file('images') as $image) {
                 $path = $image->store('images');
                 $annonce->images()->create(['url' => $path]);
             }
         }
+
+        return redirect()->route('annonces.index')->with('success', 'Annonce ajoutée avec succès.');
     }
+
+
+
 
     public function show(Annonces $annonces)
     {
