@@ -3,31 +3,8 @@
 
 @section('home')
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        {{-- <div class="row bg-secondary py-1 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">About</a>
-                    <a class="text-body mr-3" href="">Contact</a>
-                    <a class="text-body mr-3" href="">Help</a>
-                    <a class="text-body mr-3" href="">FAQs</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
 
-                <div class="d-inline-flex align-items-center d-block d-lg-none">
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-heart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-shopping-cart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                </div>
-            </div>
-        </div> --}}
+    <div class="container-fluid">
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="" class="text-decoration-none">
@@ -60,6 +37,8 @@
         </div>
     </div>
     <!-- Topbar End -->
+<!-- Modal -->
+
 
 
     <!-- Navbar Start -->
@@ -148,19 +127,90 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
+                                    <a id="horseBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Horses</a>
+                                    <a id="accessoireBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Accessoires</a>
+
                                 </div>
                             </div>
                         </div>
+
+
+                        <!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="addAnnonceModal" tabindex="-1" role="dialog" aria-labelledby="addAnnonceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAnnonceModalLabel">Ajouter une annonce</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('annonces.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_appel">Téléphone (Appel)</label>
+                        <input type="text" class="form-control" id="phone_appel" name="phone_appel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_wathsapp">Téléphone (WhatsApp)</label>
+                        <input type="text" class="form-control" id="phone_wathsapp" name="phone_wathsapp">
+                    </div>
+                    <div class="form-group">
+                        <label for="cover">Image de couverture</label>
+                        <input type="file" class="form-control-file" id="cover" name="cover" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="other_images">Autres images</label>
+                        <input type="file" class="form-control-file" id="other_images" name="other_images[]" multiple>
+                    </div>
+                    <div class="form-group">
+                        <label for="city_id">Ville</label>
+                        <select class="form-control" id="city_id" name="city_id" required>
+                            <!-- Options de ville -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="categorie">Catégorie</label>
+                        <select class="form-control" id="categorie" name="annonceable_type" required>
+                            <!-- Options de catégorie -->
+                        </select>
+                    </div>
+                    <div class="form-group" id="horseFields" style="display: none;">
+                        <label for="horse_name">Nom du cheval</label>
+                        <input type="text" class="form-control" id="horse_name" name="horse_name">
+                        <!-- Autres champs spécifiques à la catégorie cheval -->
+                    </div>
+                    <div class="form-group" id="accessoireFields" style="display: none;">
+                        <label for="accessoire_type">Type d'accessoire</label>
+                        <input type="text" class="form-control" id="accessoire_type" name="accessoire_type">
+                        <!-- Autres champs spécifiques à la catégorie accessoire -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
                         <div class="carousel-item position-relative" style="height: 430px;">
                             <img class="position-absolute w-100 h-100" src="{{ asset('styyle/img/tbourida-2.jpg') }}" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women Fashion</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Horses</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Accessoires</a>
 
                                 </div>
                             </div>
@@ -171,8 +221,8 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids Fashion</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Horses</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Accessoires</a>
                                 </div>
                             </div>
                         </div>
@@ -863,7 +913,8 @@
     <!-- Products End -->
 
 
- 
+
+
 
 
     <!-- Footer Start -->
