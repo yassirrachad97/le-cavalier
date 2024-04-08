@@ -10,6 +10,7 @@ class Annonces extends Model
     use HasFactory;
     protected $fillable = [
         'id',
+        'title',
         'description',
         'phone_appel',
         'phone_wathsapp',
@@ -39,6 +40,9 @@ class Annonces extends Model
     public function images()
     {
         return $this->hasMany(Images::class);
+    }
+    public function categorie(){
+        return $this->belongsTo(Categories::class);
     }
 
 

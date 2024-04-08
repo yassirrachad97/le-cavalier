@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accessoires', function (Blueprint $table) {
-            $table->id();
-            $table->string('accessoire_type');
-            $table->string('accessoire_name');
-            $table->timestamps();
+        Schema::table('annonces', function (Blueprint $table) {
+            $table->foreignId('category_id')->constrained('categories')->after('cover');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accessoires');
+        Schema::table('annonces', function (Blueprint $table) {
+
+        });
     }
 };

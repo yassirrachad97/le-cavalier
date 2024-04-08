@@ -59,7 +59,7 @@ class AuthController extends Controller
             }
 
             request()->session()->regenerate();
-            return redirect()->route('home');
+            return redirect()->route('frentOffice.home')->with('user', $user);
         }
 
         return redirect()->route('auth.connexion')->withErrors([

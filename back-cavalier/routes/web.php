@@ -27,7 +27,8 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::POST('/userRole', [UserController::class, 'changeRole'])->name('changeRole');
 Route::get('/blocker/{id}', [UserController::class, 'blockUser'])->name('blockUser');
 
-Route::get('/home', [HomeController::class,'index'])->name('home');
+
+
 Route::get('/dashboard', [CategorieController::class, 'index'])->name('dashboard');
 Route::get('/categories', [CategorieController::class, 'index'])->name('categories.index');
 Route::post('/categories', [CategorieController::class, 'store'])->name('categories.store');
@@ -41,7 +42,8 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 
 
 
-Route::get('/annonces',[AnnoncesController::class, 'index'])->name('annonces.index');
+// Route::get('/home',[AnnoncesController::class, 'index'])->name('annonces.index');
+Route::get('/home', [HomeController::class, 'index'])->name('frentOffice.home');
 Route::post('/annonces',[AnnoncesController::class, 'store'])->name('annonces.store');
 Route::get('/annonces/{annonces}',[AnnoncesController::class, 'show'])->name('annonces.show');
 Route::delete('/annonces/{annonces}',[AnnoncesController::class, 'destroy'])->name('annonces.destroy');

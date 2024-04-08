@@ -9,7 +9,7 @@ use App\Models\Accessoires;
 use App\Models\Categories;
 use App\Models\City;
 use App\Models\Horses;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AnnoncesController extends Controller
@@ -20,18 +20,18 @@ class AnnoncesController extends Controller
     public function index()
     {
 
-        $user = Auth::user();
 
-        $annonce = Annonces::where('organisateur_id',$user->id)->get();
+
+        $annonce = Annonces::all();
         $categories = Categories::all();
         $city = City::all();
 
         $data = [
             'Annonces' => $annonce,
             'categories' => $categories,
-            'city' => $city,
+            'cities' => $city,
         ];
-        return view('annonces.index', compact('data'));
+        return view('frentOffice.home', compact('data'));
     }
 
     /**
@@ -47,63 +47,76 @@ class AnnoncesController extends Controller
      */
 
 
-    public function store(Request $request)
-    {
-
-        $validatedData = $request->validate([
-            'description' => 'required|string',
-            'phone_appel' => 'required|string',
-            'phone_wathsapp' => 'nullable|string',
-            'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'city_id' => 'required|exists:cities,id',
-            'price' => 'required|numeric|min:0',
-            'annonceable_type' => 'required|string|in:horse,accessoire',
-            'annonceable_id' => 'required|numeric',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $annonce = Annonces::create([
-            'description' => $validatedData['description'],
-            'phone_appel' => $validatedData['phone_appel'],
-            'phone_wathsapp' => $validatedData['phone_wathsapp'],
-            'user_id' => auth()->id(),
-            'cover' => $validatedData['cover']->store('covers', 'public'),
-            'city_id' => $validatedData['city_id'],
-            'price' => $validatedData['price'],
-            'approuved' => 0,
-        ]);
 
 
-    if ($validatedData['annonceable_type'] === 'horse') {
-        $horse = Horses::create([
-            'name' => $validatedData['horse_name'],
-            'age' => $validatedData['horse_age'],
-            'color' => $validatedData['horse_color'],
-            'pedigree' => $validatedData['horse_pedigree'],
-            'category_id' => $validatedData['category_id'],
-        ]);
-
-        $annonce->annonceable()->associate($horse);
-    } elseif ($validatedData['annonceable_type'] === 'accessoire') {
-        $accessoire = Accessoires::create([
-            'type' => $validatedData['accessoire_type'],
-            'name' => $validatedData['accessoire_name'],
-            'category_id' => $validatedData['category_id'],
-        ]);
-
-        $annonce->annonceable()->associate($accessoire);
-    }
-        $annonce->save();
-
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('images');
-                $annonce->images()->create(['url' => $path]);
-            }
+     public function store(Request $request)
+     {
+         $validatedData = $request->validate([
+             'title' => 'required|string',
+             'description' => 'required|string',
+             'phone_appel' => 'required|string',
+             'phone_wathsapp' => 'nullable|string',
+             'cover' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+             'city_id' => 'required|exists:cities,id',
+             'price' => 'required|numeric|min:0',
+             'annonceable_type' => 'required|string|in:horse,accessoire',
+             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+             'horse_name' => 'nullable|string',
+             'horse_age' => 'nullable|numeric',
+             'horse_color' => 'nullable|string',
+             'horse_pedigree' => 'nullable|string',
+             'category_id' => 'required|exists:categories,id',
+             'accessoire_type' => 'nullable|string',
+             'accessoire_name' => 'nullable|string',
+         ]);
+         if ($request->hasFile('cover')) {
+            $cover = $request->file('cover')->store('covers', 'public');
+        } else {
+            $cover = null;
         }
 
-        return redirect()->route('annonces.index')->with('success', 'Annonce ajoutée avec succès.');
-    }
+         $annonceable_type = strval($validatedData['annonceable_type']);
+
+
+             if ($annonceable_type === 'horse') {
+                $annonceable = Horses::create([
+                    'horse_name' => $validatedData['horse_name'],
+                    'horse_age' => $validatedData['horse_age'],
+                    'horse_color' => $validatedData['horse_color'],
+                    'horse_pedigree' => $validatedData['horse_pedigree'] ?? 'false',
+                ]);
+                $annonceable_type = 'App\\Horses';
+            } else {
+                $annonceable = Accessoires::create([
+                    'accessoire_type' => $validatedData['accessoire_type'],
+                    'accessoire_name' => $validatedData['accessoire_name'],
+                ]);
+                $annonceable_type = 'App\\Accessoires';
+            }
+
+            $annonce = Annonces::create([
+                'title' => $validatedData['title'],
+                'description' => $validatedData['description'],
+                'phone_appel' => $validatedData['phone_appel'],
+                'phone_wathsapp' => $validatedData['phone_wathsapp'],
+                'user_id' => auth()->id(),
+                'cover' => $cover,
+                'city_id' => $validatedData['city_id'],
+                'category_id' => $validatedData['category_id'],
+                'price' => $validatedData['price'],
+                'approuved' => 0,
+                'annonceable_type' => $annonceable_type,
+                'annonceable_id' => $annonceable->id,
+            ]);
+
+         }
+
+
+
+         // ... rest of your code
+
+
+
 
 
 

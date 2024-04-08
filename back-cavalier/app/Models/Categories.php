@@ -13,4 +13,8 @@ class Categories extends Model
         'name',
 
     ];
+    public function annonce()
+    {
+        return $this->belongsTo(Annonces::class);
+    }
 }

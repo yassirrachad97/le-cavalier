@@ -9,15 +9,13 @@ class Accessoires extends Model
 {
     use HasFactory;
     protected $fillable =
-    ['type',
-     'name',
-     'category_id'];
+    ['accessoire_type',
+     'accessoire_name'
+     ];
 
     public function annonces()
     {
         return $this->morphOne(Annonces::class, 'annonceable');
     }
-    public function categorie(){
-        return $this->belongsTo(Categories::class);
-    }
+   
 }
