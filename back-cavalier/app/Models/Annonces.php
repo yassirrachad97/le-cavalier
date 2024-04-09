@@ -16,17 +16,23 @@ class Annonces extends Model
         'phone_wathsapp',
         'user_id',
         'cover',
-        'annonceable_id',
-        'annonceable_type',
+        'horse_id',
+        'accessoire_id',
         'city_id',
+        'category_id',
         'price',
         'approuved',
 
     ];
 
-    public function annonceable()
+    public function horse()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Horses::class);
+    }
+
+    public function accessoire()
+    {
+        return $this->belongsTo(Accessoires::class);
     }
 
     public function user(){

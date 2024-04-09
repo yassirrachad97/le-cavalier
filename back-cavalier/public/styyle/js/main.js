@@ -103,17 +103,15 @@
 })(jQuery);
 
 
-        $(document).ready(function(){
-            $('#horseBtn').click(function(){
-                $('#annonceable_type').val('horse');
-                $('#horseFields').show();
-                $('#accessoireFields').hide();
-            });
+$(document).ready(function() {
+    $('#horseBtn').click(function() {
+        $('#horseFields').show();
+        $('#accessoireFields').hide();
+    });
 
-            $('#accessoireBtn').click(function(){
-                $('#annonceable_type').val('accessoire');
-                $('#horseFields').hide();
-                $('#accessoireFields').show();
-            });
-        });
-    
+    $('#accessoireBtn').click(function() {
+        $('#horseFields').hide();
+        $('#accessoireFields').show();
+    });
+});
+

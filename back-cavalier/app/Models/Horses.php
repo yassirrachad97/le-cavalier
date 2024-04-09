@@ -15,9 +15,8 @@ class Horses extends Model
       'horse_pedigree'
       ];
 
-    public function annonces()
-    {
-        return $this->morphOne(Annonces::class, 'annonceable');
-    }
-    
+      public function annonce()
+      {
+          return $this->belongsTo(Annonces::class);
+      }
 }
