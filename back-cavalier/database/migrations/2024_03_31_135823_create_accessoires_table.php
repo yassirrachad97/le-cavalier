@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('accessoires', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('name');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->string('accessoire_type');
+            $table->string('accessoire_name');
             $table->timestamps();
         });
     }

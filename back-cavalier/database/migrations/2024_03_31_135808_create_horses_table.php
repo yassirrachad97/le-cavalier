@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('horses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('age');
-            $table->string('color');
-            $table->boolean('pidegrée')->default(false);
-            $table->foreignId('category_id')->constrained('categories');
+            $table->string('horse_name');
+            $table->integer('horse_age');
+            $table->string('horse_color');
+            $table->boolean('horse_pedigree')->default(false);
             $table->timestamps();
         });
     }

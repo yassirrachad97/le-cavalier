@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorie;
-use App\Models\User;
-use App\Models\Evenement;
-use Illuminate\Http\Request;
+use App\Models\Annonces;
+use App\Models\Categories;
+use App\Models\City;
+
 
 class HomeController extends Controller
 {
     public function index(){
-        
-        return view('frentOffice.home');
+        $annonce = Annonces::all();
+        $categories = Categories::all();
+        $city = City::all();
+
+        $data = [
+            'Annonces' => $annonce,
+            'categories' => $categories,
+            'cities' => $city,
+        ];
+        return view('frentOffice.home', compact('data'));
     }
 
 

@@ -9,17 +9,14 @@ class Horses extends Model
 {
     use HasFactory;
     protected $fillable =
-    ['name',
-     'age',
-      'color',
-      'pidegrée',
-      'category_id'];
+    ['horse_name',
+     'horse_age',
+      'horse_color',
+      'horse_pedigree'
+      ];
 
-    public function annonces()
-    {
-        return $this->morphOne(Annonces::class, 'annonceable');
-    }
-    public function categorie(){
-        return $this->belongsTo(Categories::class);
-    }
+      public function annonce()
+      {
+          return $this->belongsTo(Annonces::class);
+      }
 }

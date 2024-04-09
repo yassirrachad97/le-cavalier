@@ -9,7 +9,8 @@ use App\Models\Accessoires;
 use App\Models\Categories;
 use App\Models\City;
 use App\Models\Horses;
-use GuzzleHttp\Psr7\Request;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AnnoncesController extends Controller
@@ -20,18 +21,18 @@ class AnnoncesController extends Controller
     public function index()
     {
 
-        $user = Auth::user();
 
-        $annonce = Annonces::where('organisateur_id',$user->id)->get();
+
+        $annonce = Annonces::all();
         $categories = Categories::all();
         $city = City::all();
 
         $data = [
             'Annonces' => $annonce,
             'categories' => $categories,
-            'city' => $city,
+            'cities' => $city,
         ];
-        return view('annonces.index', compact('data'));
+        return view('frentOffice.home', compact('data'));
     }
 
     /**
@@ -47,63 +48,85 @@ class AnnoncesController extends Controller
      */
 
 
-    public function store(Request $request)
-    {
-
-        $validatedData = $request->validate([
-            'description' => 'required|string',
-            'phone_appel' => 'required|string',
-            'phone_wathsapp' => 'nullable|string',
-            'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'city_id' => 'required|exists:cities,id',
-            'price' => 'required|numeric|min:0',
-            'annonceable_type' => 'required|string|in:horse,accessoire',
-            'annonceable_id' => 'required|numeric',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $annonce = Annonces::create([
-            'description' => $validatedData['description'],
-            'phone_appel' => $validatedData['phone_appel'],
-            'phone_wathsapp' => $validatedData['phone_wathsapp'],
-            'user_id' => auth()->id(),
-            'cover' => $validatedData['cover']->store('covers', 'public'),
-            'city_id' => $validatedData['city_id'],
-            'price' => $validatedData['price'],
-            'approuved' => 0,
-        ]);
 
 
-    if ($validatedData['annonceable_type'] === 'horse') {
-        $horse = Horses::create([
-            'name' => $validatedData['horse_name'],
-            'age' => $validatedData['horse_age'],
-            'color' => $validatedData['horse_color'],
-            'pedigree' => $validatedData['horse_pedigree'],
-            'category_id' => $validatedData['category_id'],
-        ]);
+     public function store(Request $request)
+     {
+         try {
+             $validatedData = $request->validate([
+                 'title' => 'required|string',
+                 'description' => 'required|string',
+                 'phone_appel' => 'required|string',
+                 'phone_wathsapp' => 'nullable|string',
+                 'cover' => 'required|file',
+                 'city_id' => 'required|exists:cities,id',
+                 'price' => 'required|numeric|min:0',
+                 'horse_id' => 'nullable|exists:horses,id',
+                 'accessoire_id' => 'nullable|exists:accessoires,id',
+                 'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                 'horse_name' => 'nullable|string',
+                 'horse_age' => 'nullable|numeric',
+                 'horse_color' => 'nullable|string',
+                 'horse_pedigree' => 'nullable|string',
+                 'category_id' => 'required|exists:categories,id',
+                 'accessoire_type' => 'nullable|string',
+                 'accessoire_name' => 'nullable|string',
+             ]);
 
-        $annonce->annonceable()->associate($horse);
-    } elseif ($validatedData['annonceable_type'] === 'accessoire') {
-        $accessoire = Accessoires::create([
-            'type' => $validatedData['accessoire_type'],
-            'name' => $validatedData['accessoire_name'],
-            'category_id' => $validatedData['category_id'],
-        ]);
+             if ($request->hasFile('cover')) {
+                 $cover = $request->file('cover')->store('covers', 'public');
+             } else {
+                 $cover = null;
+             }
 
-        $annonce->annonceable()->associate($accessoire);
-    }
-        $annonce->save();
+             $annonce = Annonces::create([
+                 'title' => $validatedData['title'],
+                 'description' => $validatedData['description'],
+                 'phone_appel' => $validatedData['phone_appel'],
+                 'phone_wathsapp' => $validatedData['phone_wathsapp'],
+                 'user_id' => auth()->id(),
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('images');
-                $annonce->images()->create(['url' => $path]);
-            }
-        }
+                 'cover' => $cover,
+                 'city_id' => $validatedData['city_id'],
+                 'category_id' => $validatedData['category_id'],
+                 'horse_id' => $validatedData['horse_id'],
 
-        return redirect()->route('annonces.index')->with('success', 'Annonce ajoutée avec succès.');
-    }
+                 'accessoire_id' => $validatedData['accessoire_id'],
+                 'price' => $validatedData['price'],
+                 'approuved' => 0,
+             ]);
+
+             if ($annonce) {
+                 if ($request->has('horse_id')) {
+                     $element = Horses::create($request->only(['horse_name', 'horse_age', 'horse_color', 'horse_pedigree']));
+                 } elseif ($request->has('accessoire_id')) {
+                     $element = Accessoires::create($request->only(['accessoire_type', 'accessoire_name']));
+                 }
+
+                 if (isset($element)) {
+                     $annonce->annonceable()->associate($element);
+                     $annonce->save();
+
+                     return redirect()->back()->with('success', 'Annonce créée avec succès.');
+                 } else {
+                     throw new Exception("Échec de la création de l'élément associé.");
+                 }
+             } else {
+                 throw new Exception("Échec de la création de l'annonce.");
+             }
+         } catch (Exception $e) {
+             return redirect()->back()->withInput()->withErrors([$e->getMessage()]);
+         }
+     }
+
+
+
+
+
+
+
+
+
 
 
 

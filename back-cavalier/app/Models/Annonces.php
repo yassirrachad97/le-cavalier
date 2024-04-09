@@ -10,22 +10,29 @@ class Annonces extends Model
     use HasFactory;
     protected $fillable = [
         'id',
+        'title',
         'description',
         'phone_appel',
         'phone_wathsapp',
         'user_id',
         'cover',
-        'annonceable_id',
-        'annonceable_type',
+        'horse_id',
+        'accessoire_id',
         'city_id',
+        'category_id',
         'price',
         'approuved',
 
     ];
 
-    public function annonceable()
+    public function horse()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Horses::class);
+    }
+
+    public function accessoire()
+    {
+        return $this->belongsTo(Accessoires::class);
     }
 
     public function user(){
@@ -39,6 +46,9 @@ class Annonces extends Model
     public function images()
     {
         return $this->hasMany(Images::class);
+    }
+    public function categorie(){
+        return $this->belongsTo(Categories::class);
     }
 
 
