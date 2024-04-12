@@ -127,8 +127,9 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                    <a id="horseBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Horses</a>
-                                    <a id="accessoireBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal">Accessoires</a>
+                                    <a id="horseBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="horse">Horses</a>
+                                    <a id="accessoireBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="accessoire">Accessoires</a>
+
 
                                 </div>
                             </div>
@@ -150,7 +151,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="description">titre</label>
+                        <label for="title">titre</label>
                         <input type="text" class="form-control" id="title" name="title" rows="3" required>
                     </div>
                     <div class="form-group">
@@ -194,10 +195,10 @@
                         <label for="other_images">Autres images</label>
                         <input type="file" class="form-control-file" id="images[]" name="images[]" multiple>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <input type="hidden" id="horse_id" name="horse_id" value="">
 
-                    </div>
+                    </div> --}}
                     <div class="form-group" id="horseFields" style="display: none;">
                         <label for="horse_name">Nom du cheval</label>
                         <input type="text" class="form-control" id="horse_name" name="horse_name">
@@ -206,13 +207,13 @@
                         <label for="horse_color">color du cheval</label>
                         <input type="text" class="form-control" id="horse_color" name="horse_color">
                         <label>
-                        <input type="checkbox" name="pedire_de_cheval"> Pédiré de cheval
+                        <input type="checkbox" name="horse_pedigree"> Pédiré de cheval
                         </label>
 
                     </div>
 
                     <div class="form-group" id="accessoireFields" style="display: none;">
-                        <input type="hidden" id="accessoire_id" name="accessoire_id" value="">
+                        {{-- <input type="hidden" id="accessoire_id" name="accessoire_id" value=""> --}}
                         <label for="accessoire_type">Type d'accessoire</label>
                         <input type="text" class="form-control" id="accessoire_type" name="accessoire_type">
                         <label for="horse_name">Nom d'accessoire</label>

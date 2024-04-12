@@ -105,11 +105,13 @@
 
 $(document).ready(function() {
     $('#horseBtn').click(function() {
+        console.log("Bouton 'Horses' cliqué");
         $('#horseFields').show();
         $('#accessoireFields').hide();
     });
 
     $('#accessoireBtn').click(function() {
+        console.log("Bouton 'Accessoires' cliqué");
         $('#horseFields').hide();
         $('#accessoireFields').show();
     });
