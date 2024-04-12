@@ -49,7 +49,6 @@ class AnnoncesController extends Controller
 
 
 
-
      public function store(Request $request)
      {
          try {
@@ -79,50 +78,64 @@ class AnnoncesController extends Controller
                  $cover = null;
              }
 
-             $annonce = Annonces::create([
-                 'title' => $validatedData['title'],
-                 'description' => $validatedData['description'],
-                 'phone_appel' => $validatedData['phone_appel'],
-                 'phone_wathsapp' => $validatedData['phone_wathsapp'],
-                 'user_id' => auth()->id(),
-
-                 'cover' => $cover,
-                 'city_id' => $validatedData['city_id'],
-                 'category_id' => $validatedData['category_id'],
-                 'horse_id' => $validatedData['horse_id'],
-
-                 'accessoire_id' => $validatedData['accessoire_id'],
-                 'price' => $validatedData['price'],
-                 'approuved' => 0,
-             ]);
-
-             if ($annonce) {
-                 if ($request->has('horse_id')) {
-                     $element = Horses::create($request->only(['horse_name', 'horse_age', 'horse_color', 'horse_pedigree']));
-                 } elseif ($request->has('accessoire_id')) {
-                     $element = Accessoires::create($request->only(['accessoire_type', 'accessoire_name']));
-                 }
-
-                 if (isset($element)) {
-                     $annonce->annonceable()->associate($element);
-                     $annonce->save();
-
-                     return redirect()->back()->with('success', 'Annonce créée avec succès.');
-                 } else {
-                     throw new Exception("Échec de la création de l'élément associé.");
-                 }
-             } else {
-                 throw new Exception("Échec de la création de l'annonce.");
-             }
-         } catch (Exception $e) {
-             return redirect()->back()->withInput()->withErrors([$e->getMessage()]);
-         }
-     }
 
 
 
+        $annonceableType = null;
+        $annonceableId = null;
+        $horseId = null;
+        $accessoireId = null;
 
 
+        if ($request->filled(['horse_name', 'horse_age', 'horse_color'])) {
+            $horseData = $request->only(['horse_name', 'horse_age', 'horse_color']);
+            $horseData['horse_pedigree'] = $request->has('horse_pedigree');
+
+            $horse = Horses::create($horseData);
+            $annonceableType = Horses::class;
+            $annonceableId = $horse->id;
+        }
+         elseif ($request->filled(['accessoire_type', 'accessoire_name'])) {
+
+
+            $accessoire = Accessoires::create($request->only(['accessoire_type', 'accessoire_name']));
+            $annonceableType = Accessoires::class;
+            $annonceableId = $accessoire->id;
+        }
+        if ($annonceableType === Horses::class) {
+            $horseId = $annonceableId;
+        } else {
+            $accessoireId = $annonceableId;
+        }
+
+        //  dd(['annonceableType' => $horseId, 'annonceableId' => $annonceableId]);
+        // Création de l'annonce avec les données validées et les identifiants associés
+        // $cover = $request->file('cover')->store('covers', 'public');
+        // dd(['annonceableType' => $annonceableType, 'annonceableId' => $annonceableId]);
+        $annonce = Annonces::create([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'phone_appel' => $validatedData['phone_appel'],
+            'phone_wathsapp' => $validatedData['phone_wathsapp'],
+            'user_id' => auth()->id(),
+            'cover' => $cover,
+            'city_id' => $validatedData['city_id'],
+            'category_id' => $validatedData['category_id'],
+            'horse_id' => $horseId,
+            'accessoire_id' => $accessoireId,
+            // 'annonceable_type' => $annonceableType,
+            'price' => $validatedData['price'],
+            'approuved' => false,
+        ]);
+// $annonce->images()->createMany($images);
+        // Redirection avec un message de succès
+        return redirect()->back()->with('success', 'Annonce créée avec succès.');
+
+    } catch (Exception $e) {
+        // Redirection avec un message d'erreur
+        return redirect()->back()->with('error', $e->getMessage());
+    }
+}
 
 
 
