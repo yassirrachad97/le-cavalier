@@ -55,14 +55,14 @@ class AuthController extends Controller
             if ($user->is_blocked) {
                 Auth::logout();
                 Session::flash('error', 'Votre compte est bloqué.');
-                return redirect()->route('auth.connexion');
+                return redirect()->route('auth.login');
             }
 
             request()->session()->regenerate();
             return redirect()->route('frentOffice.home')->with('user', $user);
         }
 
-        return redirect()->route('auth.connexion')->withErrors([
+        return redirect()->route('auth.login')->withErrors([
             'email' => 'No matching user found with provided email and password.'
         ]);
     }
@@ -73,6 +73,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('auth.connexion');
+        return redirect()->route('auth.login');
     }
 }

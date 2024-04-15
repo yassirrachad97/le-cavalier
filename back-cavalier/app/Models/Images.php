@@ -11,7 +11,8 @@ class Images extends Model
 
     protected $fillable =[
     'id',
-    'Annonce_id'
+    'Annonce_id',
+    'url',
     ];
 
 
