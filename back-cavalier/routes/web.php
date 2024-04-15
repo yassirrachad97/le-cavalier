@@ -42,7 +42,7 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 
 
 
-// Route::get('/home',[AnnoncesController::class, 'index'])->name('annonces.index');
+Route::get('/pageAnnonces', [AnnoncesController::class, 'index'])->name('annonces.index');
 Route::get('/home', [HomeController::class, 'index'])->name('frentOffice.home');
 Route::post('/annonces',[AnnoncesController::class, 'store'])->name('annonces.store');
 Route::get('/annonces/{annonces}',[AnnoncesController::class, 'show'])->name('annonces.show');

@@ -53,7 +53,7 @@
                         <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo"  width="40" />
                         <span class="h2 text-uppercase text-dark bg-primary px-2 ml-n1">lecavalier</span>
                     </a> --}}
-                    <a class="navbar-brand " href="{{ route('home') }}">
+                    <a class="navbar-brand " href="{{ route('frentOffice.home') }}">
                         <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo"  width="30%" />
                         <b class="text-decoration-none m-1">
 

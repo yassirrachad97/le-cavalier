@@ -34,7 +34,7 @@ class AnnoncesController extends Controller
             'categories' => $categories,
             'cities' => $city,
         ];
-        return view('frentOffice.home', compact('data'));
+        return view('frentOffice.pageAnnonce', compact('data'));
     }
 
     /**
