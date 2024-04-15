@@ -193,12 +193,9 @@
                     </div>
                     <div class="form-group">
                         <label for="other_images">Autres images</label>
-                        <input type="file" class="form-control-file" id="images[]" name="images[]" multiple>
+                        <input type="file" class="form-control-file" id="other_images" name="images[]" accept="image/*" multiple>
                     </div>
-                    {{-- <div class="form-group">
-                        <input type="hidden" id="horse_id" name="horse_id" value="">
 
-                    </div> --}}
                     <div class="form-group" id="horseFields" style="display: none;">
                         <label for="horse_name">Nom du cheval</label>
                         <input type="text" class="form-control" id="horse_name" name="horse_name">
@@ -213,7 +210,7 @@
                     </div>
 
                     <div class="form-group" id="accessoireFields" style="display: none;">
-                        {{-- <input type="hidden" id="accessoire_id" name="accessoire_id" value=""> --}}
+                     
                         <label for="accessoire_type">Type d'accessoire</label>
                         <input type="text" class="form-control" id="accessoire_type" name="accessoire_type">
                         <label for="horse_name">Nom d'accessoire</label>

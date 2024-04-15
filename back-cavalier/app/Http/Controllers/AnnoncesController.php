@@ -9,6 +9,7 @@ use App\Models\Accessoires;
 use App\Models\Categories;
 use App\Models\City;
 use App\Models\Horses;
+use App\Models\Images;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,7 +63,7 @@ class AnnoncesController extends Controller
                  'price' => 'required|numeric|min:0',
                  'horse_id' => 'nullable|exists:horses,id',
                  'accessoire_id' => 'nullable|exists:accessoires,id',
-                 'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                //  'images.*' => 'image|mimes:jpeg,png,jpg,gif',
                  'horse_name' => 'nullable|string',
                  'horse_age' => 'nullable|numeric',
                  'horse_color' => 'nullable|string',
@@ -108,10 +109,7 @@ class AnnoncesController extends Controller
             $accessoireId = $annonceableId;
         }
 
-        //  dd(['annonceableType' => $horseId, 'annonceableId' => $annonceableId]);
-        // Création de l'annonce avec les données validées et les identifiants associés
-        // $cover = $request->file('cover')->store('covers', 'public');
-        // dd(['annonceableType' => $annonceableType, 'annonceableId' => $annonceableId]);
+
         $annonce = Annonces::create([
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
@@ -127,8 +125,21 @@ class AnnoncesController extends Controller
             'price' => $validatedData['price'],
             'approuved' => false,
         ]);
-// $annonce->images()->createMany($images);
-        // Redirection avec un message de succès
+        $images = $request->file('images');
+
+        if ($images) {
+            foreach ($images as $image) {
+
+                $path = $image->store("/images");
+               $id = $annonce->id;
+                $image = new Images();
+                $image->url = $path;
+                $image->Annonce_id = $id;
+                $image->save();
+
+            }
+
+        }
         return redirect()->back()->with('success', 'Annonce créée avec succès.');
 
     } catch (Exception $e) {
@@ -146,7 +157,7 @@ class AnnoncesController extends Controller
 
     public function show(Annonces $annonces)
     {
-        //
+        return view('frentOffice.detail', ['annonce' => $annonces]);
     }
 
     /**
