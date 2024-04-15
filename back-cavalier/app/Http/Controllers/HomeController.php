@@ -7,21 +7,21 @@ use App\Models\Categories;
 use App\Models\City;
 
 
+
 class HomeController extends Controller
 {
     public function index(){
-        $annonce = Annonces::all();
+        $annonces = Annonces::latest()->take(3)->get();
         $categories = Categories::all();
         $city = City::all();
 
         $data = [
-            'Annonces' => $annonce,
+            'annonces' => $annonces,
             'categories' => $categories,
             'cities' => $city,
         ];
-        return view('frentOffice.home', compact('data'));
+        return view('frentOffice.home', $data);
     }
-
 
 
 //     public function index()
