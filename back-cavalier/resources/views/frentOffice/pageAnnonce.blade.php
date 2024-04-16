@@ -10,23 +10,14 @@
                 <div class="product-img position-relative overflow-hidden">
 
                     <img class="img-fluid w-100" src="{{asset('storage/'.$annonce->cover)}}" alt="">
-                    {{-- <div class="product-action">
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                    </div> --}}
                 </div>
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="#">{{ $annonce->title }}</a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
                         <h5>{{ $annonce->price }}</h5>
-                        <!-- Ajoutez ici la partie "prix barré" si nécessaire -->
                     </div>
                     <div class="d-flex align-items-center justify-content-center mb-1">
-                        <!-- Ajoutez ici la partie "étoiles" si nécessaire -->
                         <small></small>
-                        <!-- Assurez-vous d'ajuster la propriété 'views' selon votre modèle d'annonce -->
                     </div>
                 </div>
             </div>

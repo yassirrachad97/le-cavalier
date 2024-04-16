@@ -116,4 +116,40 @@ $(document).ready(function() {
         $('#accessoireFields').show();
     });
 });
+$(document).ready(function() {
+    $('#horseBtn2').click(function() {
+        console.log("Bouton 'Horses' du deuxième carrousel cliqué");
+        $('#horseFields').show();
+        $('#accessoireFields').hide();
+    });
 
+    $('#accessoireBtn2').click(function() {
+        console.log("Bouton 'Accessoires' du deuxième carrousel cliqué");
+        $('#horseFields').hide();
+        $('#accessoireFields').show();
+    });
+
+    $('#horseBtn3').click(function() {
+        console.log("Bouton 'Horses' du troisième carrousel cliqué");
+        $('#horseFields').show();
+        $('#accessoireFields').hide();
+    });
+
+    $('#accessoireBtn3').click(function() {
+        console.log("Bouton 'Accessoires' du troisième carrousel cliqué");
+        $('#horseFields').hide();
+        $('#accessoireFields').show();
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const otherImagesInput = document.getElementById('other_images');
+    otherImagesInput.addEventListener('change', function() {
+        const selectedFiles = otherImagesInput.files;
+        const maxAllowed = 4;
+        if (selectedFiles.length > maxAllowed) {
+            otherImagesInput.value = '';
+            alert('Vous ne pouvez pas ajouter plus de 4 images.');
+        }
+    });
+});
