@@ -171,18 +171,15 @@ public function show(Annonces $annonces)
             'details' => $annonces->accessoire
         ];
     }
+
+    // Récupérer les autres données nécessaires
     $city = City::all();
-    $annonce = Annonces::all();
     $categories = Categories::all();
-    $data = [
-        'Annonces' => $annonce,
-        'categories' => $categories,
-        'cities' => $city,
-    ];
 
     // Passer les données à la vue
-    return view('frentOffice.details', compact('data', 'detail'));
+    return view('frentOffice.details', compact('annonces', 'detail', 'city', 'categories'));
 }
+
 
 
 

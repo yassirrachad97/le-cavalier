@@ -67,25 +67,44 @@
                             class="mdi mdi-menu"></i></a>
                 </div>
 
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-
-                    <ul class="navbar-nav float-start me-auto">
-
-                        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href=""><i
-                                    class="mdi mdi-magnify me-1"></i>
-                                <span class="font-16">Search</span></a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter" />
-                                <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
-                            </form>
-                        </li>
-                    </ul>
-
-                    <ul class="navbar-nav float-end">
-
-                        <li class="nav-item dropdown">
-                            <a class="
+                <div
+                class="navbar-collapse collapse"
+                id="navbarSupportedContent"
+                data-navbarbg="skin5"
+              >
+                <!-- ============================================================== -->
+                <!-- toggle and nav items -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav float-start me-auto">
+                  <!-- ============================================================== -->
+                  <!-- Search -->
+                  <!-- ============================================================== -->
+                  <li class="nav-item search-box">
+                    <a
+                      class="nav-link waves-effect waves-dark"
+                      href="javascript:void(0)"
+                      ><i class="mdi mdi-magnify me-1"></i>
+                      <span class="font-16">Search</span></a
+                    >
+                    <form class="app-search position-absolute">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search &amp; enter"
+                      />
+                      <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
+                    </form>
+                  </li>
+                </ul>
+                <!-- ============================================================== -->
+                <!-- Right side toggle and nav items -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav float-end">
+                  <!-- ============================================================== -->
+                  <!-- User profile and search -->
+                  <!-- ============================================================== -->
+                  <li class="nav-item dropdown">
+                    <a class="
                     nav-link
                     dropdown-toggle
                     text-muted
@@ -97,35 +116,42 @@
                                 {{-- @auth
                                 <span> {{ Auth::user()->name }}</span>
                                 @endauth --}}
-                                <img src="" alt="user"
+                                <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
                                     class="rounded-circle mx-1" width="31" />
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end user-dd animated"
-                                aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0)"><i
-                                        class="mdi mdi-account m-r-5 m-l-5"></i> My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i
-                                        class="mdi mdi-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i
-                                        class="mdi mdi-email m-r-5 m-l-5"></i> Inbox</a>
-                            </ul>
-                        </li>
-
+                    <ul
+                      class="dropdown-menu dropdown-menu-end user-dd animated"
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <a class="dropdown-item" href="javascript:void(0)"
+                        ><i class="mdi mdi-account m-r-5 m-l-5"></i> My Profile</a
+                      >
+                      <a class="dropdown-item" href="javascript:void(0)"
+                        ><i class="mdi mdi-wallet m-r-5 m-l-5"></i> My Balance</a
+                      >
+                      <a class="dropdown-item" href="javascript:void(0)"
+                        ><i class="mdi mdi-email m-r-5 m-l-5"></i> Inbox</a
+                      >
                     </ul>
-                </div>
+                  </li>
+                  <!-- ============================================================== -->
+                  <!-- User profile and search -->
+                  <!-- ============================================================== -->
+                </ul>
+              </div>
             </nav>
         </header>
 
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
-            <div class="scroll-sidebar mt-3">
+            {{-- <div class="scroll-sidebar mt-3">
 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item ">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('categories.index') }}"
                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu">categories</span></a>
+                                    class="hide-menu ">categories</span></a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index')}}"
@@ -148,9 +174,83 @@
                     </ul>
                 </nav>
 
-            </div>
+            </div> --}}
 
         </aside>
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+              <!-- Sidebar navigation-->
+              <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                  <li class="sidebar-item">
+                    <a
+                      class="sidebar-link waves-effect waves-dark sidebar-link"
+                      href="{{ route('categories.index') }}"
+                      aria-expanded="false"
+                      ><i class="mdi mdi-view-dashboard"></i
+                      ><span class="hide-menu">Dashboard</span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="sidebar-link waves-effect waves-dark sidebar-link"
+                      href="{{ route('users.index')}}"
+                      aria-expanded="false"
+                      ><i class="mdi mdi-account-network"></i
+                      ><span class="hide-menu">Profile</span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="sidebar-link waves-effect waves-dark sidebar-link"
+                      href="table-basic.html"
+                      aria-expanded="false"
+                      ><i class="mdi mdi-border-all"></i
+                      ><span class="hide-menu">Table</span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="sidebar-link waves-effect waves-dark sidebar-link"
+                      href="icon-material.html"
+                      aria-expanded="false"
+                      ><i class="mdi mdi-face"></i
+                      ><span class="hide-menu">Icon</span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="sidebar-link waves-effect waves-dark sidebar-link"
+                      href="starter-kit.html"
+                      aria-expanded="false"
+                      ><i class="mdi mdi-file"></i
+                      ><span class="hide-menu">Blank</span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="sidebar-link waves-effect waves-dark sidebar-link"
+                      href="error-404.html"
+                      aria-expanded="false"
+                      ><i class="mdi mdi-alert-outline"></i
+                      ><span class="hide-menu">404</span></a
+                    >
+                  </li>
+                  <li class="text-center p-40 upgrade-btn">
+                    <a
+                      href="https://www.wrappixel.com/templates/flexy-bootstrap-admin-template/"
+                      class="btn d-block w-100 btn-danger text-white"
+                      target="_blank"
+                      >Upgrade to Pro</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+              <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+          </aside>
 
         <div class="page-wrapper">
 

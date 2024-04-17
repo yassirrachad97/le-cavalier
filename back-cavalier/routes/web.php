@@ -45,7 +45,7 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 Route::get('/pageAnnonces', [AnnoncesController::class, 'index'])->name('annonces.index');
 Route::get('/home', [HomeController::class, 'index'])->name('frentOffice.home');
 Route::post('/annonces',[AnnoncesController::class, 'store'])->name('annonces.store');
-Route::get('/annonces/{annonce}', [AnnoncesController::class, 'show'])->name('annonces.show');
+Route::get('/annonces/{annonce}', [AnnoncesController::class, 'show'])->name('annonces.details');
 Route::delete('/annonces/{annonces}',[AnnoncesController::class, 'destroy'])->name('annonces.destroy');
 Route::get('/annonces/{annonces}/edit',[AnnoncesController::class, 'edit'])->name('annonces.edit');
 Route::put('/annonces/{annonces}',[AnnoncesController::class, 'update'])->name('annonces.update');
