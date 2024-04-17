@@ -131,7 +131,7 @@ class AnnoncesController extends Controller
         if ($images) {
             foreach ($images as $image) {
 
-                $path = $image->store("/images");
+                $path = $image->store('images', 'public');
                $id = $annonce->id;
                 $image = new Images();
                 $image->url = $path;
@@ -155,31 +155,36 @@ class AnnoncesController extends Controller
 
 
 
-
-public function show(Annonces $annonces)
+public function show(Annonces $annonce)
 {
     $detail = null;
 
-    if ($annonces->horse_id) {
+    // Déplacez cette partie après la définition de $data
+    $city = City::all();
+    $categories = Categories::all();
+    $data = [
+        'annonce' => $annonce,
+        'categories' => $categories,
+        'cities' => $city,
+    ];
+    // dd($data['annonce']);
+
+    // Maintenant, vous pouvez accéder à $annonce directement
+    if ($annonce->horse_id) {
         $detail = [
             'type' => 'cheval',
-            'details' => $annonces->horse
+            'details' => $annonce->horse
         ];
-    } elseif ($annonces->accessoire_id) {
+    } elseif ($annonce->accessoire_id) {
         $detail = [
             'type' => 'accessoire',
-            'details' => $annonces->accessoire
+            'details' => $annonce->accessoire
         ];
     }
 
-    // Récupérer les autres données nécessaires
-    $city = City::all();
-    $categories = Categories::all();
-
     // Passer les données à la vue
-    return view('frentOffice.details', compact('annonces', 'detail', 'city', 'categories'));
+    return view('frentOffice.details', compact('data', 'detail'));
 }
-
 
 
 
