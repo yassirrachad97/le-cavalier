@@ -7,15 +7,12 @@
         <div id="product-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner bg-light">
                 @foreach($data['Annonces'] as $key => $annonce)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img class="w-100 h-100" src="{{ asset('storage/'.$annonce->cover) }}" alt="Image">
-                    </div>
-                    @foreach($annonce->images as $image)
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="{{ asset('storage/'.$image->url) }}" alt="Image">
-                        </div>
+                        @foreach($annonce->images as $imageKey => $image)
+                            <div class="carousel-item {{ $key == 0 && $imageKey == 0 ? 'active' : '' }}">
+                                <img class="w-100 h-100" src="{{ asset('storage/'.$image->url) }}" alt="Image">
+                            </div>
+                        @endforeach
                     @endforeach
-                @endforeach
             </div>
             <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                 <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -27,15 +24,22 @@
     </div>
     <div class="col-lg-7 h-auto mb-30">
         <div class="h-100 bg-light p-30">
-            <h3>Product Name Goes Here</h3>
+            @foreach($data['Annonces'] as $annonce)
+            @if($annonce->horse_id)
+            <h3>{{ $annonce->horse->nom }}</h3>
 
-            <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+            <h3 class="font-weight-semi-bold mb-4">{{ $annonce->price }}DH</h3>
             <div class="d-flex mb-3">
-            <strong class="text-dark mr-3">Sizes:</strong>
+            <strong class="text-dark mr-3">age:{{ $annonce->horse->age }}</strong>
             </div>
             <div class="d-flex mb-3">
-            <strong class="text-dark mr-3">color:</strong>
+            <strong class="text-dark mr-3">color:{{ $annonce->horse->age }}</strong>
             </div>
+            <h4>Pedigree: {{ $annonce->horse->pedigree ? 'Oui' : 'Non' }}</h4>
+            @elseif($annonce->accessoire_id)
+            <h3>{{ $annonce->accessoire->nom }}</h3>
+            <h4>Type: {{ $annonce->accessoire->type }}</h4>
+        @endif
             <div class="d-flex align-items-center mb-4 pt-2">
                 <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
                     Cart</button>
@@ -45,6 +49,7 @@
 
         </div>
     </div>
+    @endforeach
 </div>
 <div class="row px-xl-5">
     <div class="col">
@@ -119,4 +124,4 @@
 </div>
 
 @endsection
-.
+

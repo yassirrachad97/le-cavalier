@@ -156,10 +156,35 @@ class AnnoncesController extends Controller
 
 
 
-    public function show(Annonces $annonces)
-    {
-        return view('frentOffice.detail', ['annonce' => $annonces]);
+public function show(Annonces $annonces)
+{
+    $detail = null;
+
+    if ($annonces->horse_id) {
+        $detail = [
+            'type' => 'cheval',
+            'details' => $annonces->horse
+        ];
+    } elseif ($annonces->accessoire_id) {
+        $detail = [
+            'type' => 'accessoire',
+            'details' => $annonces->accessoire
+        ];
     }
+    $city = City::all();
+    $annonce = Annonces::all();
+    $categories = Categories::all();
+    $data = [
+        'Annonces' => $annonce,
+        'categories' => $categories,
+        'cities' => $city,
+    ];
+
+    // Passer les données à la vue
+    return view('frentOffice.details', compact('data', 'detail'));
+}
+
+
 
     /**
      * Show the form for editing the specified resource.

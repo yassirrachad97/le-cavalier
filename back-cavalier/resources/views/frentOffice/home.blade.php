@@ -226,7 +226,6 @@
                         <a class="h6 text-decoration-none text-truncate" href="">{{ $annonce->title }}</a>
                         <div class="row text-light items-start mt-2">
                             <div class="col text-truncate">
-
                             <p class="text-dark items-center text-center text-truncate" ><i class="bi bi-geo-alt text-black"></i><br>{{$annonce->city->name}}</p>
                             </div>
                             <div class="col">
@@ -286,12 +285,15 @@
                      </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">{{ $annonce->title }}</a>
-                        <div class="col text-truncate">
-                            <p class="mb-2 items-center text-black text-center" title="{{$annonce->city->name}}" ><i class="fa-solid fa-location-dot"></i><br>{{$annonce->city->name}}</p>
+                        <div class="row text-light items-start mt-2">
+                            <div class="col text-truncate">
+                            <p class="text-dark items-center text-center text-truncate" ><i class="bi bi-geo-alt text-black"></i><br>{{$annonce->city->name}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-dark items-center text-center text-truncate" title="{{$annonce->created_at->diffForHumans(null, false, false)}}"><i class="bi bi-clock-history text-black"></i><br>{{$annonce->created_at->diffForHumans(null, false, false)}}</p>
                            </div>
-                           <div class="col">
-                            <p class="text-dark items-center text-center text-truncate" title="{{$annonce->created_at->diffForHumans(null, false, false)}}"><i class="bi bi-clock-history text-black"></i><br>{{$annonce->created_at->diffForHumans(null, false, false)}}</p>
-                          </div>
+                         </div>
+
                     </div>
                 </div>
             </div>

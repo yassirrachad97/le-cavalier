@@ -45,8 +45,9 @@ class Annonces extends Model
 
     public function images()
     {
-        return $this->hasMany(Images::class);
+        return $this->hasMany(Images::class, 'annonce_id');
     }
+
     public function categorie(){
         return $this->belongsTo(Categories::class);
     }
