@@ -158,8 +158,6 @@ class AnnoncesController extends Controller
 public function show(Annonces $annonce)
 {
     $detail = null;
-
-    // Déplacez cette partie après la définition de $data
     $city = City::all();
     $categories = Categories::all();
     $data = [
@@ -169,17 +167,20 @@ public function show(Annonces $annonce)
     ];
     // dd($data['annonce']);
 
-    // Maintenant, vous pouvez accéder à $annonce directement
+
     if ($annonce->horse_id) {
+
         $detail = [
             'type' => 'cheval',
             'details' => $annonce->horse
         ];
     } elseif ($annonce->accessoire_id) {
+
         $detail = [
             'type' => 'accessoire',
             'details' => $annonce->accessoire
         ];
+
     }
 
     // Passer les données à la vue

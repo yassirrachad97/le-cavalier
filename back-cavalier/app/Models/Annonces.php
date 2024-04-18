@@ -48,7 +48,8 @@ class Annonces extends Model
         return $this->hasMany(Images::class, 'annonce_id');
     }
 
-    public function categorie(){
+    public function category()
+    {
         return $this->belongsTo(Categories::class);
     }
 

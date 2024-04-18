@@ -41,7 +41,6 @@ class CategorieController extends Controller
      */
     public function show()
     {
-
     }
 
     /**
@@ -56,8 +55,8 @@ class CategorieController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
-        $categorie-> name = $request->input("name");
-       $categorie->update();
+        $categorie->name = $request->input("name");
+        $categorie->update();
 
 
         return redirect()->back()->with('success', 'Category updated successfully.');
@@ -68,9 +67,9 @@ class CategorieController extends Controller
      */
     public function destroy(Categories $categorie)
     {
-        $categorie->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        $categorie->annonces()->delete();
+        $categorie->delete();
+        return redirect()->back()->with('success', 'Category deleted successfully.');
     }
 }
-
