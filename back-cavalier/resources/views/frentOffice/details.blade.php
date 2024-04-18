@@ -36,7 +36,7 @@
 
             <div class="d-flex mb-3">
 
-            <strong class="text-dark mr-3">age_horse: {{ $data['annonce']->horse->horse_age }}</strong>
+            <strong class="text-dark mr-3">age_horse: {{ $data['annonce']->horse->horse_age }} ans</strong>
             </div>
 
             <div class="d-flex mb-3">

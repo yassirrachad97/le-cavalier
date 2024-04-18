@@ -21,13 +21,11 @@
                                         href="">{{ $annonce->title }}</a>
                                     <div class="row text-light items-start mt-2">
                                         <div class="col text-truncate">
-                                            <p class="text-dark items-center text-center text-truncate"><i
-                                                    class="bi bi-geo-alt text-black"></i><br>{{ $annonce->city->name }}</p>
+                                            <p class="text-dark items-center text-center text-truncate"><i class="fa-solid fa-location-dot"></i><br>{{ $annonce->city->name }}</p>
                                         </div>
                                         <div class="col">
                                             <p class="text-dark items-center text-center text-truncate"
-                                                title="{{ $annonce->created_at->diffForHumans(null, false, false) }}"><i
-                                                    class="bi bi-clock-history text-black"></i><br>{{ $annonce->created_at->diffForHumans(null, false, false) }}
+                                                title="{{ $annonce->created_at->diffForHumans(null, false, false) }}"><i class="fa-regular fa-clock"></i><br>{{ $annonce->created_at->diffForHumans(null, false, false) }}
                                             </p>
                                         </div>
                                     </div>
