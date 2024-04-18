@@ -203,12 +203,13 @@ public function show(Annonces $annonce)
      * Show the form for editing the specified resource.
      */
     public function edit(Annonces $annonces)
-{
-    $categories = Categories::all();
-    $cities = City::all();
+    {
+        $categories = Categories::all();
+        $cities = City::all();
 
-    return view('backOffice.updateAnnonceModal', compact('annonces', 'categories', 'cities'));
-}
+        return view('backOffice.updateAnnonceModal', compact('annonces', 'categories', 'cities'));
+    }
+
 
 
     /**
@@ -216,7 +217,45 @@ public function show(Annonces $annonce)
      */
     public function update(UpdateAnnoncesRequest $request, Annonces $annonces)
     {
-        //
+        try {
+            // Valider les données de la requête
+            $validatedData = $request->validated();
+
+            // Mettre à jour les champs de l'annonce avec les données validées
+            $annonces->update([
+                'title' => $validatedData['title'],
+                'description' => $validatedData['description'],
+                'phone_appel' => $validatedData['phone_appel'],
+                'phone_wathsapp' => $validatedData['phone_wathsapp'],
+                'city_id' => $validatedData['city_id'],
+                'category_id' => $validatedData['category_id'],
+                'price' => $validatedData['price'],
+            ]);
+
+            // Mettre à jour les champs liés à un cheval
+            if ($validatedData['horse_id']) {
+                $annonces->horse->update([
+                    'horse_name' => $validatedData['horse_name'],
+                    'horse_age' => $validatedData['horse_age'],
+                    'horse_color' => $validatedData['horse_color'],
+                    'horse_pedigree' => $validatedData['horse_pedigree'] ?? false,
+                ]);
+            }
+
+            // Mettre à jour les champs liés à un accessoire
+            if ($validatedData['accessoire_id']) {
+                $annonces->accessoire->update([
+                    'accessoire_type' => $validatedData['accessoire_type'],
+                    'accessoire_name' => $validatedData['accessoire_name'],
+                ]);
+            }
+
+            // Redirection avec un message de succès
+            return redirect()->back()->with('success', 'Annonce mise à jour avec succès.');
+        } catch (\Exception $e) {
+            // Redirection avec un message d'erreur
+            return redirect()->back()->with('error', 'Erreur lors de la mise à jour de l\'annonce : ' . $e->getMessage());
+        }
     }
 
     /**

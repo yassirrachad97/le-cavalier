@@ -13,6 +13,7 @@
     <meta name="robots" content="noindex,nofollow" />
     <title>Cavalier</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('styyle/img/tbourida-4.png') }}" />
 
@@ -48,11 +49,6 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header" data-logobg="skin6">
 
-                    {{-- <a href="" class="text-decoration-none ml-4">
-
-                        <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo"  width="40" />
-                        <span class="h2 text-uppercase text-dark bg-primary px-2 ml-n1">lecavalier</span>
-                    </a> --}}
                     <a class="navbar-brand " href="{{ route('frentOffice.home') }}">
                         <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo"  width="30%" />
                         <b class="text-decoration-none m-1">
@@ -113,9 +109,9 @@
                   "
                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                {{-- @auth
-                                <span> {{ Auth::user()->name }}</span>
-                                @endauth --}}
+                                @auth
+                                <span>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
+                                @endauth
                                 <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
                                     class="rounded-circle mx-1" width="31" />
                             </a>

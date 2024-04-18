@@ -40,74 +40,6 @@
         </div>
     </div>
     <!-- Preloader Start -->
-    {{-- <header>
-        <!--? Header Start -->
-        <div class="header-area">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2 col-md-1">
-                            <div class="logo">
-                                <a href="{{ route('home') }}"><img src="{{ asset('css/mystyle/img/logo/logo.png') }}" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10">
-                            <div class="menu-main d-flex align-items-center justify-content-end">
-                                <!-- Main-menu -->
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a href="{{ route('home') }}">Home</a></li>
-                                            <li><a href="{{ route('login') }}">connexion</a></li>
-                                            @auth
-                                            @if(Auth::user()->role_id == 1)
-                                            <li><a href="{{ route('frentOffice.reservation') }}">pannier</a></li>
-                                            @endif
-                                            @endauth
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    @auth
-                                        <div class="dropdown">
-                                            <button class="btn header-btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{ Auth::user()->name }}
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                                @auth
-                                                @if(Auth::user()->role_id == 3)
-                                                <li><a class="dropdown-item" href="{{ route('dashboardAdmn') }}">dashboard admin</a></li>
-                                                @endif
-                                                @if(Auth::user()->role_id == 2)
-                                                <li><a class="dropdown-item" href="{{ route('dashboardOrg') }}">dashboard organisateur</a></li>
-                                                @endif
-                                                @endauth
-
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li>
-                                                    <form action="{{ route('auth.logout') }}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="dropdown-item">Déconnexion</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    @endauth
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
-    </header> --}}
     <div class="container-fluid">
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
@@ -137,6 +69,7 @@
                             @csrf
                             <button class="dropdown-item" type="submit">Logout</button>
                         </form>
+                        <a href="{{ route('annonces.dashIndex') }}" class="dropdown-item">dashboard</a>
                     </div>
                 </div>
             </div>
