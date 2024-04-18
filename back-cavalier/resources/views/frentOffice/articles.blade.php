@@ -17,11 +17,7 @@
 			</div>
 		</div>
 		<div class="ticket-info">
-			<p class="date">
-				<span>TUESDAY</span>
-				<span class="june-29">JUNE 29TH</span>
-				<span>2021</span>
-			</p>
+		
 			<div class="show-name">
 				<h1>SOUR Prom</h1>
 				<h2>Olivia Rodrigo</h2>
@@ -36,11 +32,7 @@
 		</div>
 	</div>
 	<div class="right">
-		<p class="admit-one">
-			<span>ADMIT ONE</span>
-			<span>ADMIT ONE</span>
-			<span>ADMIT ONE</span>
-		</p>
+
 		<div class="right-info-container">
 			<div class="show-name">
 				<h1>SOUR Prom</h1>
