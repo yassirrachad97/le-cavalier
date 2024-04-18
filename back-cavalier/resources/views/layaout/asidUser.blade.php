@@ -189,28 +189,10 @@
                   <li class="sidebar-item">
                     <a
                       class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="{{ route('categories.index') }}"
+                      href="{{ route('annonces.dashIndex') }}"
                       aria-expanded="false"
                       ><i class="mdi mdi-view-dashboard"></i
-                      ><span class="hide-menu">categorie</span></a
-                    >
-                  </li>
-                  <li class="sidebar-item">
-                    <a
-                      class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="{{ route('users.index')}}"
-                      aria-expanded="false"
-                      ><i class="mdi mdi-account-network"></i
-                      ><span class="hide-menu">users</span></a
-                    >
-                  </li>
-                  <li class="sidebar-item">
-                    <a
-                      class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="table-basic.html"
-                      aria-expanded="false"
-                      ><i class="mdi mdi-border-all"></i
-                      ><span class="hide-menu">Table</span></a
+                      ><span class="hide-menu">Annonces</span></a
                     >
                   </li>
                   <li class="sidebar-item">
@@ -219,27 +201,17 @@
                       href="icon-material.html"
                       aria-expanded="false"
                       ><i class="mdi mdi-face"></i
-                      ><span class="hide-menu">Statistiques</span></a
+                      ><span class="hide-menu">Icon</span></a
                     >
                   </li>
-                  <li class="sidebar-item">
-                    <a
-                      class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="starter-kit.html"
-                      aria-expanded="false"
-                      ><i class="mdi mdi-file"></i
-                      ><span class="hide-menu">Articles</span></a
-                    >
-                  </li>
-                  {{-- <li class="sidebar-item">
-                    <a
-                      class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="error-404.html"
-                      aria-expanded="false"
-                      ><i class="mdi mdi-alert-outline"></i
-                      ><span class="hide-menu">404</span></a
-                    > --}}
-                  </li>
+                    <li class="sidebar-item">
+                        <a
+                        class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="table-bootstrap.html"
+                        aria-expanded="false"
+                        ><i class="mdi mdi-border-all"></i
+                        ><span class="hide-menu">Statistiques</span></a
+                        >
                   <li class="text-center p-40 upgrade-btn">
                     <div class="btn d-block w-100 btn-danger text-white"
                       target="_blank">
@@ -258,8 +230,7 @@
 
         <div class="page-wrapper">
 
-            @yield('category')
-            @yield('user')
+            @yield('Annonces')
             {{-- @yield('approved')
             @yield('statistique') --}}
 

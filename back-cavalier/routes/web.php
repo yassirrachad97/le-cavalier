@@ -46,7 +46,7 @@ Route::get('/pageAnnonces', [AnnoncesController::class, 'index'])->name('annonce
 Route::get('/home', [HomeController::class, 'index'])->name('frentOffice.home');
 Route::post('/annonces',[AnnoncesController::class, 'store'])->name('annonces.store');
 Route::get('/annonces/{annonce}', [AnnoncesController::class, 'show'])->name('annonces.details');
+Route::get('/annoncesDashbord', [AnnoncesController::class, 'dashIndex'])->name('annonces.dashIndex');
 Route::delete('/annonces/{annonces}',[AnnoncesController::class, 'destroy'])->name('annonces.destroy');
 Route::get('/annonces/{annonces}/edit',[AnnoncesController::class, 'edit'])->name('annonces.edit');
 Route::put('/annonces/{annonces}',[AnnoncesController::class, 'update'])->name('annonces.update');
-

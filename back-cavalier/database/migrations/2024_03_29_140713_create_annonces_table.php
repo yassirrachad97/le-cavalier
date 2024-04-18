@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone_appel');
             $table->string('phone_wathsapp')->nullable();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->unsignedBigInteger('horse_id')->nullable();
             $table->unsignedBigInteger('accessoire_id')->nullable();
             $table->foreign('horse_id')->references('id')->on('horses')->onDelete('cascade');

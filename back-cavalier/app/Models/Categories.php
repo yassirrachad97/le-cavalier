@@ -13,8 +13,8 @@ class Categories extends Model
         'name',
 
     ];
-    public function annonce()
+    public function annonces()
     {
-        return $this->belongsTo(Annonces::class);
+        return $this->hasMany(Annonces::class, 'category_id');
     }
 }

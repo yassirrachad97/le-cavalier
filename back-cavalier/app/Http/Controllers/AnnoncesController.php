@@ -40,9 +40,19 @@ class AnnoncesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function dashIndex()
     {
-        //
+        $user = Auth::user();
+        $annonces = Annonces::where('user_id', $user->id)->get();
+        $categories = Categories::all();
+        $city = City::all();
+        $data = [
+            'Annonces' => $annonces,
+            'categories' => $categories,
+            'cities' => $city,
+        ];
+        return view('backOffice.annonces', compact('data'));
+
     }
 
     /**
@@ -158,8 +168,6 @@ class AnnoncesController extends Controller
 public function show(Annonces $annonce)
 {
     $detail = null;
-
-    // Déplacez cette partie après la définition de $data
     $city = City::all();
     $categories = Categories::all();
     $data = [
@@ -169,17 +177,20 @@ public function show(Annonces $annonce)
     ];
     // dd($data['annonce']);
 
-    // Maintenant, vous pouvez accéder à $annonce directement
+
     if ($annonce->horse_id) {
+
         $detail = [
             'type' => 'cheval',
             'details' => $annonce->horse
         ];
     } elseif ($annonce->accessoire_id) {
+
         $detail = [
             'type' => 'accessoire',
             'details' => $annonce->accessoire
         ];
+
     }
 
     // Passer les données à la vue
@@ -192,9 +203,13 @@ public function show(Annonces $annonce)
      * Show the form for editing the specified resource.
      */
     public function edit(Annonces $annonces)
-    {
-        //
-    }
+{
+    $categories = Categories::all();
+    $cities = City::all();
+
+    return view('backOffice.updateAnnonceModal', compact('annonces', 'categories', 'cities'));
+}
+
 
     /**
      * Update the specified resource in storage.
