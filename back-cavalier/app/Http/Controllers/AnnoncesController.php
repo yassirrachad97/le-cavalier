@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Annonces;
-use App\Http\Requests\StoreAnnoncesRequest;
 use App\Http\Requests\UpdateAnnoncesRequest;
 use App\Models\Accessoires;
 use App\Models\Categories;
@@ -216,47 +215,45 @@ public function show(Annonces $annonce)
      * Update the specified resource in storage.
      */
     public function update(UpdateAnnoncesRequest $request, Annonces $annonces)
-    {
-        try {
-            // Valider les données de la requête
-            $validatedData = $request->validated();
+{
+    try {
+        $validatedData = $request->validated();
 
-            // Mettre à jour les champs de l'annonce avec les données validées
-            $annonces->update([
-                'title' => $validatedData['title'],
-                'description' => $validatedData['description'],
-                'phone_appel' => $validatedData['phone_appel'],
-                'phone_wathsapp' => $validatedData['phone_wathsapp'],
-                'city_id' => $validatedData['city_id'],
-                'category_id' => $validatedData['category_id'],
-                'price' => $validatedData['price'],
+        // Mise à jour des champs communs à toutes les annonces
+        $annonces->update([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'phone_appel' => $validatedData['phone_appel'],
+            'phone_wathsapp' => $validatedData['phone_wathsapp'],
+            'city_id' => $validatedData['city_id'],
+            'category_id' => $validatedData['category_id'],
+            'price' => $validatedData['price'],
+        ]);
+
+        // Mise à jour des champs spécifiques pour les chevaux
+        if (isset($validatedData['horse_name']) && isset($validatedData['horse_age']) && isset($validatedData['horse_color'])) {
+            $annonces->horse()->update([
+                'horse_name' => $validatedData['horse_name'],
+                'horse_age' => $validatedData['horse_age'],
+                'horse_color' => $validatedData['horse_color'],
+                'horse_pedigree' => isset($validatedData['horse_pedigree']) ? true : false,
             ]);
-
-            // Mettre à jour les champs liés à un cheval
-            if ($validatedData['horse_id']) {
-                $annonces->horse->update([
-                    'horse_name' => $validatedData['horse_name'],
-                    'horse_age' => $validatedData['horse_age'],
-                    'horse_color' => $validatedData['horse_color'],
-                    'horse_pedigree' => $validatedData['horse_pedigree'] ?? false,
-                ]);
-            }
-
-            // Mettre à jour les champs liés à un accessoire
-            if ($validatedData['accessoire_id']) {
-                $annonces->accessoire->update([
-                    'accessoire_type' => $validatedData['accessoire_type'],
-                    'accessoire_name' => $validatedData['accessoire_name'],
-                ]);
-            }
-
-            // Redirection avec un message de succès
-            return redirect()->back()->with('success', 'Annonce mise à jour avec succès.');
-        } catch (\Exception $e) {
-            // Redirection avec un message d'erreur
-            return redirect()->back()->with('error', 'Erreur lors de la mise à jour de l\'annonce : ' . $e->getMessage());
         }
+
+        // Mise à jour des champs spécifiques pour les accessoires
+        if (isset($validatedData['accessoire_type']) && isset($validatedData['accessoire_name'])) {
+            $annonces->accessoire()->update([
+                'accessoire_type' => $validatedData['accessoire_type'],
+                'accessoire_name' => $validatedData['accessoire_name'],
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Annonce mise à jour avec succès.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Erreur lors de la mise à jour de l\'annonce : ' . $e->getMessage());
     }
+}
+
 
     /**
      * Remove the specified resource from storage.
