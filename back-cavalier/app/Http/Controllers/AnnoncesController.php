@@ -216,10 +216,10 @@ public function show(Annonces $annonce)
      */
     public function update(UpdateAnnoncesRequest $request, Annonces $annonces)
 {
-    try {
-        $validatedData = $request->validated();
 
-        // Mise à jour des champs communs à toutes les annonces
+    try {
+
+        $validatedData = $request->validated();
         $annonces->update([
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
@@ -229,8 +229,9 @@ public function show(Annonces $annonce)
             'category_id' => $validatedData['category_id'],
             'price' => $validatedData['price'],
         ]);
+        dd($request->all());
 
-        // Mise à jour des champs spécifiques pour les chevaux
+
         if (isset($validatedData['horse_name']) && isset($validatedData['horse_age']) && isset($validatedData['horse_color'])) {
             $annonces->horse()->update([
                 'horse_name' => $validatedData['horse_name'],
@@ -240,13 +241,13 @@ public function show(Annonces $annonce)
             ]);
         }
 
-        // Mise à jour des champs spécifiques pour les accessoires
         if (isset($validatedData['accessoire_type']) && isset($validatedData['accessoire_name'])) {
             $annonces->accessoire()->update([
                 'accessoire_type' => $validatedData['accessoire_type'],
                 'accessoire_name' => $validatedData['accessoire_name'],
             ]);
         }
+
 
         return redirect()->back()->with('success', 'Annonce mise à jour avec succès.');
     } catch (\Exception $e) {
