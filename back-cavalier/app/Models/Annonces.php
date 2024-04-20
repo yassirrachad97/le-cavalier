@@ -24,16 +24,29 @@ class Annonces extends Model
         'approuved',
 
     ];
-    
 
     public function horse()
     {
-        return $this->belongsTo(Horses::class);
+        return $this->belongsTo(Horses::class, 'horse_id');
     }
 
     public function accessoire()
     {
-        return $this->belongsTo(Accessoires::class);
+        return $this->belongsTo(Accessoires::class, 'accessoire_id');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($annonce) {
+            if ($annonce->horse) {
+                $annonce->horse->delete();
+            }
+
+            if ($annonce->accessoire) {
+                $annonce->accessoire->delete();
+            }
+        });
     }
 
     public function user(){

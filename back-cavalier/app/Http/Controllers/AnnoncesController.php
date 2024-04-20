@@ -255,25 +255,26 @@ public function show(Annonces $annonce)
     }
 }
 
-public function deleteWithCover()
-{
 
-    $coverPath = storage_path('app/public/' . $this->cover);
-
-
-    if (file_exists($coverPath)) {
-        unlink($coverPath);
-    }
-
-    // Supprimer l'annonce
-    $this->delete();
-}
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Annonces $annonces)
+    public function destroy(Request $request,$id)
     {
-        $annonces->deleteWithCover();
-        return redirect()->back()->with('success', 'Annonce supprimé avec succès.');
+        try {
+            // Utilisez findOrFail pour obtenir l'annonce en fonction de certains critères de la requête
+            $annonce = Annonces::findOrFail($id);
+            // dd($annonce);
+
+            // Utilisez la méthode destroy sur l'objet $annonce
+            $annonce->delete();
+
+            // Redirigez avec un message de succès
+            return redirect()->back()->with('success', 'Annonce supprimée avec succès.');
+        } catch (\Exception $e) {
+            // En cas d'erreur, redirigez avec un message d'erreur
+            return redirect()->back()->with('error', 'Erreur lors de la suppression de l\'annonce : ' . $e->getMessage());
+        }
     }
+
 }
