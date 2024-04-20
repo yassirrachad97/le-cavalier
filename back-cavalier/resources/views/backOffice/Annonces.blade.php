@@ -36,7 +36,12 @@
 
                             <button class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#updateModal{{ $annonce->id }}">update</button>
-                            <button class="btn btn-danger" type="submit">delete</button>
+                                <form action="{{ route('annonces.destroy', ['annonce' => $annonce->id]) }}" method="POST" onsubmit="return confirmDelete()">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">delete</button>
+                                </form>
+
                         </div>
                     </a>
                 </div>
@@ -160,6 +165,11 @@
                     </div>
                 </div>
             </div>
+            <script>
+                function confirmDelete() {
+                return confirm("Are you sure you want to delete this annonce?");
+                }
+                </script>
         @endforeach
     </div>
 @endsection

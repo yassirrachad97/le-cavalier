@@ -214,37 +214,37 @@ public function show(Annonces $annonce)
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAnnoncesRequest $request, Annonces $annonces)
+    public function update(UpdateAnnoncesRequest $request, $id)
 {
 
     try {
+        $annonces = Annonces::findOrFail($id);
 
-        $validatedData = $request->validated();
+
         $annonces->update([
-            'title' => $validatedData['title'],
-            'description' => $validatedData['description'],
-            'phone_appel' => $validatedData['phone_appel'],
-            'phone_wathsapp' => $validatedData['phone_wathsapp'],
-            'city_id' => $validatedData['city_id'],
-            'category_id' => $validatedData['category_id'],
-            'price' => $validatedData['price'],
+            'title' => $request->title,
+            'description' => $request->description,
+            'phone_appel' => $request->phone_appel,
+            'phone_wathsapp' => $request->phone_wathsapp,
+            'city_id' => $request->city_id,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
         ]);
-        dd($request->all());
 
 
-        if (isset($validatedData['horse_name']) && isset($validatedData['horse_age']) && isset($validatedData['horse_color'])) {
+        if (isset($request->horse_name) && isset($request->horse_age) && isset($request->horse_color)) {
             $annonces->horse()->update([
-                'horse_name' => $validatedData['horse_name'],
-                'horse_age' => $validatedData['horse_age'],
-                'horse_color' => $validatedData['horse_color'],
-                'horse_pedigree' => isset($validatedData['horse_pedigree']) ? true : false,
+                'horse_name' => $request->horse_name,
+                'horse_age' => $request->horse_age,
+                'horse_color' => $request->horse_color,
+                'horse_pedigree' => $request->has('horse_pedigree') ? true : false,
             ]);
         }
 
-        if (isset($validatedData['accessoire_type']) && isset($validatedData['accessoire_name'])) {
+        if (isset($request->accessoire_type) && isset($request->accessoire_name)) {
             $annonces->accessoire()->update([
-                'accessoire_type' => $validatedData['accessoire_type'],
-                'accessoire_name' => $validatedData['accessoire_name'],
+                'accessoire_type' => $request->accessoire_type,
+                'accessoire_name' => $request->accessoire_name,
             ]);
         }
 
@@ -255,12 +255,25 @@ public function show(Annonces $annonce)
     }
 }
 
+public function deleteWithCover()
+{
 
+    $coverPath = storage_path('app/public/' . $this->cover);
+
+
+    if (file_exists($coverPath)) {
+        unlink($coverPath);
+    }
+
+    // Supprimer l'annonce
+    $this->delete();
+}
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Annonces $annonces)
     {
-        //
+        $annonces->deleteWithCover();
+        return redirect()->back()->with('success', 'Annonce supprimé avec succès.');
     }
 }

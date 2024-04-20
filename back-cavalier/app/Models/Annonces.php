@@ -24,6 +24,7 @@ class Annonces extends Model
         'approuved',
 
     ];
+    
 
     public function horse()
     {

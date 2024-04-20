@@ -217,6 +217,8 @@
             @foreach($data['annonces_horse'] as $annonce)
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
+                    <a href="{{ route('annonces.details', ['annonce' => $annonce->id]) }}" class="text-decoration-none">
+
                    <div class="rounded-top text-end" style="background-image:url({{'storage/'.$annonce->cover}}); background-position: center;
                        background-size: cover;
                           height:10em">
@@ -237,6 +239,7 @@
                             </div>
 
                     </div>
+                    </a>
                 </div>
             </div>
             @endforeach
@@ -281,6 +284,8 @@
             @foreach($data['annonces_accessoire'] as $annonce)
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
+                    <a href="{{ route('annonces.details', ['annonce' => $annonce->id]) }}" class="text-decoration-none">
+
                    <div class="rounded-top text-end" style="background-image:url({{'storage/'.$annonce->cover}}); background-position: center;
                        background-size: cover;
                           height:10em">
@@ -301,6 +306,7 @@
                             </div>
 
                     </div>
+                    </a>
                 </div>
             </div>
             @endforeach
