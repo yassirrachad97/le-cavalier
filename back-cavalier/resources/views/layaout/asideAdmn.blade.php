@@ -113,9 +113,9 @@
                   "
                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                {{-- @auth
-                                <span> {{ Auth::user()->name }}</span>
-                                @endauth --}}
+                                @auth
+                                <span>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
+                                @endauth
                                 <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
                                     class="rounded-circle mx-1" width="31" />
                             </a>

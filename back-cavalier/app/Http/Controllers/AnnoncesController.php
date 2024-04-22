@@ -24,7 +24,7 @@ class AnnoncesController extends Controller
 
 
 
-        $annonce = Annonces::all();
+        $annonce = Annonces::paginate(12);
         $categories = Categories::all();
         $city = City::all();
 

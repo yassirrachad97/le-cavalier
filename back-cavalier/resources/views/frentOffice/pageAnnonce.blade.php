@@ -38,6 +38,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $data['Annonces']->links() }}
         </div>
     </div>
 @endsection

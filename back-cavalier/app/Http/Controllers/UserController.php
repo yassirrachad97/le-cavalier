@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::with('role')->get();
+        $users = User::with('role')->paginate(8);
 
         return view('backOffice.users', compact('users'));
     }
