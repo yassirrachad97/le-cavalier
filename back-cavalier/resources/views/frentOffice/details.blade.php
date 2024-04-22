@@ -86,19 +86,26 @@
                 </div>
                 <div class="tab-pane fade" id="tab-pane-3">
                     <div class="row">
-                        <div class="col-md-6">
-                            <h4 class="mb-4"> review for "annonce"</h4>
-                            <div class="media mb-4">
-                                <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                <div class="media-body">
-                                    <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                    <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                </div>
-                            </div>
+                        <div class="col-md-12">
+                            <h4 class="mb-4">Reviews for "{{ $data['annonce']->title }}"</h4>
+                            @if($data['annonce']->commentaires)
+                                @foreach($data['annonce']->commentaires as $commentaire)
+                                    <div class="media mb-4">
+                                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        <div class="media-body">
+                                            <h6>{{ $commentaire->user->name }} <small>- <i>{{ $commentaire->created_at->format('d M Y') }}</i></small></h6>
+                                            <p>{{ $commentaire->content }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                {{ $commentaires->links() }}
+                            @else
+                                <p>No reviews found for "{{ $data['annonce']->title }}"</p>
+                            @endif
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <h4 class="mb-4">Leave a review</h4>
-                            
+
                             <div class="d-flex my-3">
                             </div>
                             <form>

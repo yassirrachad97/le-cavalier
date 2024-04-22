@@ -2,6 +2,16 @@
 @extends('layaout.navbar')
 
 @section('home')
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
 <!-- Modal -->
 <div class="modal fade" id="addAnnonceModal" tabindex="-1" role="dialog" aria-labelledby="addAnnonceModalLabel" aria-hidden="true">
@@ -110,11 +120,11 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Bienvenue sur le meilleur site de TBOURIDA et équitation</h1>
 
-                                    @auth
+
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Vous avez un cheval ou des accessoires et vous voulez les vendrais clicker ici</p>
                                     <a id="horseBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="horse">Horses</a>
                                     <a id="accessoireBtn" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="accessoire">Accessoires</a>
-                                    @endauth
+
 
                                 </div>
                             </div>
@@ -126,11 +136,11 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Bienvenue sur le meilleur site de TBOURIDA et équitation</h1>
 
-                                    @auth
+
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Vous avez un cheval ou des accessoires et vous voulez les vendrais clicker ici</p>
                                     <a id="horseBtn2" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="horse">Horses</a>
                                     <a id="accessoireBtn2" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="accessoire">Accessoires</a>
-                                    @endauth
+
 
                                 </div>
                             </div>
@@ -141,11 +151,11 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Bienvenue sur le meilleur site de TBOURIDA et équitation</h1>
 
-                                    @auth
+
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Vous avez un cheval ou des accessoires et vous voulez les vendrais clicker ici</p>
                                     <a id="horseBtn3" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="horse">Horses</a>
                                     <a id="accessoireBtn3" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="accessoire">Accessoires</a>
-                                    @endauth
+                                  
 
                                 </div>
                             </div>

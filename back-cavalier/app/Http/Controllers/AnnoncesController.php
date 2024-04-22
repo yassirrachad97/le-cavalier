@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAnnoncesRequest;
 use App\Models\Annonces;
 use App\Http\Requests\UpdateAnnoncesRequest;
 use App\Models\Accessoires;
@@ -10,8 +11,6 @@ use App\Models\City;
 use App\Models\Horses;
 use App\Models\Images;
 use Exception;
-use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 
 class AnnoncesController extends Controller
@@ -60,28 +59,10 @@ class AnnoncesController extends Controller
 
 
 
-     public function store(Request $request)
+     public function store(StoreAnnoncesRequest $request)
      {
          try {
-             $validatedData = $request->validate([
-                 'title' => 'required|string',
-                 'description' => 'required|string',
-                 'phone_appel' => 'required|string',
-                 'phone_wathsapp' => 'nullable|string',
-                 'cover' => 'required|file',
-                 'city_id' => 'required|exists:cities,id',
-                 'price' => 'required|numeric|min:0',
-                 'horse_id' => 'nullable|exists:horses,id',
-                 'accessoire_id' => 'nullable|exists:accessoires,id',
-                //  'images.*' => 'image|mimes:jpeg,png,jpg,gif',
-                 'horse_name' => 'nullable|string',
-                 'horse_age' => 'nullable|numeric',
-                 'horse_color' => 'nullable|string',
-                 'horse_pedigree' => 'nullable|string',
-                 'category_id' => 'required|exists:categories,id',
-                 'accessoire_type' => 'nullable|string',
-                 'accessoire_name' => 'nullable|string',
-             ]);
+            $validatedData = $request->validated();
 
              if ($request->hasFile('cover')) {
                  $cover = $request->file('cover')->store('covers', 'public');
@@ -131,11 +112,11 @@ class AnnoncesController extends Controller
             'category_id' => $validatedData['category_id'],
             'horse_id' => $horseId,
             'accessoire_id' => $accessoireId,
-            // 'annonceable_type' => $annonceableType,
             'price' => $validatedData['price'],
             'approuved' => false,
         ]);
         $images = $request->file('images');
+        $user_id = auth()->id();
 
         if ($images) {
             foreach ($images as $image) {
@@ -150,17 +131,18 @@ class AnnoncesController extends Controller
             }
 
         }
-        return redirect()->back()->with('success', 'Annonce créée avec succès.');
-
     } catch (Exception $e) {
-        // Redirection avec un message d'erreur
-        return redirect()->back()->with('error', $e->getMessage());
+        logger()->error($e->getMessage());
+        if (auth()->id() === null) {
+            return redirect()->back()->withErrors("Erreur lors de la création de l'annonce. Veuillez vous connecter.");
+        }
+        return redirect()->back()->withErrors("Erreur lors de la création de lannonce");
     }
-}
+
+    return redirect()->back()->withSuccess('Annonce créée avec succès.');
 
 
-
-
+     }
 
 
 
@@ -192,7 +174,7 @@ public function show(Annonces $annonce)
 
     }
 
-    // Passer les données à la vue
+
     return view('frentOffice.details', compact('data', 'detail'));
 }
 
@@ -249,9 +231,10 @@ public function show(Annonces $annonce)
         }
 
 
-        return redirect()->back()->with('success', 'Annonce mise à jour avec succès.');
+        return redirect()->back()->withSuccess('success', 'Annonce mise à jour avec succès.');
     } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Erreur lors de la mise à jour de l\'annonce : ' . $e->getMessage());
+        logger()->error($e->getMessage());
+        return redirect()->back()->withSuccess('error', 'Erreur lors de la mise à jour de l\'annonce : ' );
     }
 }
 
@@ -259,21 +242,21 @@ public function show(Annonces $annonce)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
         try {
-            // Utilisez findOrFail pour obtenir l'annonce en fonction de certains critères de la requête
+
             $annonce = Annonces::findOrFail($id);
             // dd($annonce);
 
-            // Utilisez la méthode destroy sur l'objet $annonce
+
             $annonce->delete();
 
-            // Redirigez avec un message de succès
-            return redirect()->back()->with('success', 'Annonce supprimée avec succès.');
+
+            return redirect()->back()->withSuccess('Annonce supprimée avec succès.');
         } catch (\Exception $e) {
-            // En cas d'erreur, redirigez avec un message d'erreur
-            return redirect()->back()->with('error', 'Erreur lors de la suppression de l\'annonce : ' . $e->getMessage());
+            logger()->error($e->getMessage());
+            return redirect()->back()->withErrors( 'Erreur lors de la suppression de l\'annonce : ');
         }
     }
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnoncesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -55,3 +56,9 @@ Route::get('/annoncesDashbord', [AnnoncesController::class, 'dashIndex'])->name(
 Route::delete('/annonces/{annonce}',[AnnoncesController::class, 'destroy'])->name('annonces.destroy');
 Route::get('/annonces/{annonces}/edit',[AnnoncesController::class, 'edit'])->name('annonces.edit');
 Route::put('/annonces/{annonce}', [AnnoncesController::class, 'update'])->name('annonces.update');
+
+
+Route::get('/commentaires', [CommentaireController::class, 'index'])->name('commentaires.index');
+Route::post('/commentaires/{annonceId}', [CommentaireController::class, 'store'])->name('commentaires.store');
+Route::put('/commentaires/{commentId}', [CommentaireController::class, 'update'])->name('commentaires.update');
+Route::delete('/commentaires/{commentId}', [CommentaireController::class, 'delete'])->name('commentaires.delete');

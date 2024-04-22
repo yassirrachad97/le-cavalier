@@ -61,6 +61,10 @@ class Annonces extends Model
     {
         return $this->hasMany(Images::class, 'annonce_id');
     }
+    public function commentaire()
+    {
+        return $this->hasMany(Commentaire::class, 'annonce_id');
+    }
 
     public function category()
     {

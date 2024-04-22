@@ -27,22 +27,9 @@ class HomeController extends Controller
         return view('frentOffice.home', compact('data'));
     }
 
-//     public function index()
-//     {
-//         $evenements = Evenement::where('approuved', 1)->latest()->paginate(3);
-//         $categories = Categorie::all();
-//         return view('frentOffice.home', compact('evenements','categories'));
-//     }
 
 
 
 
-//     public function showStatistics()
-// {
-//     $totalUsers = User::count();
-//     $totalEvents = Evenement::count();
-
-//     return view('backOffice.statistique', compact('totalUsers', 'totalEvents'));
-// }
 
 }
