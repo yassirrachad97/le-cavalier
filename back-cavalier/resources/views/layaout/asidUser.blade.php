@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="{{ asset('dashstyle/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('dashstyle/css/owl.carousel.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('dashstyle/css/slicknav.css') }}">
+	<link rel="stylesheet" href="{{ asset('dashstyle/css/app2.css') }}">
     <link rel="stylesheet" href="{{ asset('dashstyle/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('dashstyle/css/gijgo.css') }}">
 	<link rel="stylesheet" href="{{ asset('dashstyle/css/animate.min.cs')}}">
@@ -112,23 +113,14 @@
                                 @auth
                                 <span>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
                                 @endauth
-                                <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
-                                    class="rounded-circle mx-1" width="31" />
+                                @if (Auth::check() && Auth::user()->image)
+                                <img class="roundede-circle mt-5" width="100px" src="{{asset('storage/'.Auth::user()->image)}}"
+                                    alt="user photo">
+                                    @else
+                                    <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
+                                                    class="roundede-circle mx-1" width="31" />
+                                    @endif
                             </a>
-                    <ul
-                      class="dropdown-menu dropdown-menu-end user-dd animated"
-                      aria-labelledby="navbarDropdown"
-                    >
-                      <a class="dropdown-item" href="javascript:void(0)"
-                        ><i class="mdi mdi-account m-r-5 m-l-5"></i> My Profile</a
-                      >
-                      <a class="dropdown-item" href="javascript:void(0)"
-                        ><i class="mdi mdi-wallet m-r-5 m-l-5"></i> My Balance</a
-                      >
-                      <a class="dropdown-item" href="javascript:void(0)"
-                        ><i class="mdi mdi-email m-r-5 m-l-5"></i> Inbox</a
-                      >
-                    </ul>
                   </li>
                   <!-- ============================================================== -->
                   <!-- User profile and search -->
@@ -140,37 +132,6 @@
 
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
-            {{-- <div class="scroll-sidebar mt-3">
-
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item ">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('categories.index') }}"
-                                aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu ">categories</span></a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index')}}"
-                                aria-expanded="false"><i class="mdi mdi-account-network"></i><span
-                                    class="hide-menu">utilisateur</span></a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                                <i class="mdi mdi-bell"></i>
-                                <span class="hide-menu">evenements</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
-                                aria-expanded="false"><i class="mdi mdi-file"></i><span
-                                    class="hide-menu">statistiques</span></a>
-                        </li>
-
-                    </ul>
-                </nav>
-
-            </div> --}}
 
         </aside>
 
@@ -194,10 +155,10 @@
                   <li class="sidebar-item">
                     <a
                       class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="icon-material.html"
+                      href="{{ route('user.EditeProfil') }}"
                       aria-expanded="false"
                       ><i class="mdi mdi-face"></i
-                      ><span class="hide-menu">Icon</span></a
+                      ><span class="hide-menu">Profile</span></a
                     >
                   </li>
                     <li class="sidebar-item">
@@ -227,6 +188,7 @@
         <div class="page-wrapper">
 
             @yield('Annonces')
+            @yield('EditeProfil')
             {{-- @yield('approved')
             @yield('statistique') --}}
 

@@ -23,9 +23,14 @@ Route::get('/', [AuthController::class,'connexion'])->name('auth.login');
 Route::post('/connexion', [AuthController::class,'signin'])->name('signin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+Route::put('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
+Route::get('EditeProfil', [AuthController::class, 'EditeProfil'])->name('user.EditeProfil');
+
+
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::POST('/userRole', [UserController::class, 'changeRole'])->name('changeRole');
 Route::get('/blocker/{id}', [UserController::class, 'blockUser'])->name('blockUser');
+
 
 
 

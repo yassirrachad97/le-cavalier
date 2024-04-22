@@ -75,4 +75,42 @@ class AuthController extends Controller
 
         return redirect()->route('auth.login');
     }
+    public function EditeProfil(Request $request)
+    {
+         $user = Auth::user();
+        return view('backOffice.Profile', compact('user'));
+    }
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        // $request->validate([
+        //     'first_name' => 'required|string|min:2|max:12',
+        //     'last_name' =>  'required|string|min:2|max:12',
+        //     'email' => 'required|email|unique:users,email,' . $user->id,
+        //     'password' => 'nullable|min:6',
+        //     'password_confirmation' => 'nullable|same:password',
+        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'phone' => 'required|string|unique:users,phone',
+        // ]);
+
+
+        $user->first_name = $request->input("first_name");
+        $user->last_name = $request->input("last_name");
+        $user->email = $request->input("email");
+        $user->phone = $request->input("phone");
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->input("password"));
+        }
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profil', 'public');
+            $user->image = $imagePath;
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
 }

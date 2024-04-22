@@ -30,34 +30,28 @@
             <form action="{{ route('signup') }}" method="POST">
                 @csrf
                 <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+
                 <div class="input-container">
                     <input type="text" name="first_name" placeholder="First Name" />
-                    <input type="text" name="last_name" placeholder="Last Name" />
-                    <input type="text" name="phone" placeholder="Phone" />
-                    <input type="email" name="email" placeholder="Email" />
-                    <input type="password" name="password" placeholder="Password" />
-                </div>
-                <div class="error-container">
                     @error('first_name')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                    <input type="text" name="last_name" placeholder="Last Name" />
                     @error('last_name')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                    <input type="text" name="phone" placeholder="Phone" />
                     @error('phone')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                    <input type="email" name="email" placeholder="Email" />
                     @error('email')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                    <input type="password" name="password" placeholder="Password" />
                     @error('password')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
@@ -66,14 +60,16 @@
             <form action="{{ route('signin') }}" method="POST">
                 @csrf
                 <h1>Sign in</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+
                 <div class="input-container">
                     <input type="email" name="email" placeholder="Email" />
+                    @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                     <input type="password" name="password" placeholder="Password" />
+                    @error('password')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
                 <a href="{{ route('forget.password.get') }}">Forgot your password?</a>
                 <button type="submit">Sign In</button>
