@@ -106,17 +106,26 @@
                         <div class="col-md-12">
                             <h4 class="mb-4">Leave a review</h4>
 
-                            <div class="d-flex my-3">
-                            </div>
-                            <form>
+                            <form method="POST" action="{{ route('commentaires.store', ['annonceId' => $data['annonce']->id]) }}">
+
+                                @csrf
                                 <div class="form-group">
-                                    <label for="message">Your Review *</label>
-                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                    <label for="content">Your Review *</label>
+                                    <textarea id="content" name="content" cols="30" rows="5" class="form-control @error('content') is-invalid @enderror"></textarea>
+                                    @error('content')
+                                    <input type="hidden" name="annonce_id" value="{{ $data['annonce']->id }}">
+
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+
+
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
 
-
                                 <div class="form-group mb-0">
-                                    <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                    <button type="submit" class="btn btn-primary px-3">Leave Your Review</button>
                                 </div>
                             </form>
                         </div>

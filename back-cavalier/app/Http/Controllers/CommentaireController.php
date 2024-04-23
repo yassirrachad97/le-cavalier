@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Annonces;
 use App\Models\Commentaire;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class CommentaireController extends Controller
@@ -11,24 +12,43 @@ class CommentaireController extends Controller
 
     public function index()
     {
-        
+
         $commentaires = Commentaire::paginate(5);
         return view('frentOffice.details', compact('commentaires'));
     }
 
+
     public function store(Request $request, $annonceId)
     {
-        $request->validate([
-            'content' => 'required|string|max:255',
-        ]);
+        try {
+            // Vérifier si l'utilisateur est authentifié
+            // if (!auth()->check()) {
+            //     return redirect()->back()->withErrors('You must be logged in to add a comment.');
+            // }
 
-        Commentaire::create([
-            'annonce_id' => $annonceId,
-            'user_id' => auth()->user()->id,
-            'content' => $request->input('content'),
-        ]);
+            // Valider le contenu du commentaire
+            $request->validate([
+                'content' => 'required|string|max:255',
+            ]);
 
-        return redirect()->back()->withSuccess('success', 'Comment added successfully');
+
+            // Créer le commentaire dans la base de données
+            Commentaire::create([
+                'annonce_id' => $annonceId,
+                'user_id' => auth()->user()->id,
+                'content' => $request->input('content'),
+            ]);
+            dd($annonceId);
+
+            // Redirection avec un message de succès
+            return redirect()->back()->withSuccess('Comment added successfully');
+        } catch (QueryException $e) {
+            // Gérer les exceptions liées à la base de données
+            return redirect()->back()->withErrors('An error occurred while adding the comment.');
+        } catch (\Exception $e) {
+            // Gérer d'autres exceptions
+            return redirect()->back()->withErrors('An unexpected error occurred.');
+        }
     }
 
     public function update(Request $request, $commentId)

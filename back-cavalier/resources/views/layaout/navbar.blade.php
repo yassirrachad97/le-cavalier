@@ -51,7 +51,8 @@
             <div class="col-lg-4 col-6 text-left">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+
+                        <input type="text" class="form-control" onkeyup="filter()" id="titleFilter" placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -233,6 +234,23 @@
             </div>
         </div>
     </div>
+    <script>
+        function filter() {
+            // var categoryValue = document.getElementById('categoryFilter').value;
+            var searchValue = document.getElementById('titleFilter').value;
+            // var categoryValue = categoryElement ? categoryElement.value : 'all';
+            var xhr = new XMLHttpRequest();
+
+            var url = '/search?title=' + searchValue;
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    document.getElementById('annonceContainer').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+    </script>
 </body>
 
 </html>
