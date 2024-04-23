@@ -114,7 +114,7 @@
                                 <span>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
                                 @endauth
                                 @if (Auth::check() && Auth::user()->image)
-                                <img class="roundede-circle mt-5" width="90px" src="{{asset('storage/'.Auth::user()->image)}}"
+                                <img class="rounded-circle mt-5" width="90px" src="{{asset('storage/'.Auth::user()->image)}}"
                                     alt="user photo">
                                     @else
                                     <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
@@ -164,7 +164,7 @@
                     <li class="sidebar-item">
                         <a
                         class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="table-bootstrap.html"
+                        href="{{ route('statistiqueUser') }}"
                         aria-expanded="false"
                         ><i class="mdi mdi-border-all"></i
                         ><span class="hide-menu">Statistiques</span></a
@@ -186,11 +186,10 @@
           </aside>
 
         <div class="page-wrapper">
-
             @yield('Annonces')
             @yield('EditeProfil')
-            {{-- @yield('approved')
-            @yield('statistique') --}}
+            @yield('statistique')
+
 
             <div class="container-fluid">
 

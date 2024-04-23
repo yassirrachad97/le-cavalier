@@ -188,7 +188,7 @@
                       ><span class="hide-menu">Articles</span></a
                     >
                   </li>
-                
+
                   </li>
                   <li class="text-center p-40 upgrade-btn">
                     <div class="btn d-block w-100 btn-danger text-white"
@@ -211,6 +211,7 @@
             @yield('category')
             @yield('user')
             @yield('approved')
+            @yield('articles')
             {{-- @yield('statistique') --}}
 
             <div class="container-fluid">

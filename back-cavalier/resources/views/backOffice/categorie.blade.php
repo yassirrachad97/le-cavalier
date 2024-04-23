@@ -2,7 +2,7 @@
 @section('category')
 <button class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#addModal">Ajouter categories
 </button>
-<!-- Modal pour Ajouter -->
+
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -11,7 +11,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Contenu du formulaire pour l'ajout -->
+
                 <form action="{{ route('categories.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
@@ -48,7 +48,7 @@
                 <div class="d-flex gap-2 col-6">
                     <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#updateModal{{ $categorie->id }}">update
                     </button>
-                    <!-- Modal pour Ajouter -->
+                    
                     <div class="modal fade" id="updateModal{{ $categorie->id }}" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

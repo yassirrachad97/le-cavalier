@@ -280,6 +280,17 @@ public function show(Annonces $annonce)
 
     return view('backOffice.approuve', compact('annoncesNonApprouves'));
 }
+public function statistiqueUser()
+{
+    $userId = Auth::id();
 
+    $totalAnnonces = Annonces::where('user_id', $userId)->count();
+
+    $totalAccessoires = Annonces::where('user_id', $userId)->whereNotNull('accessoire_id')->count();
+    $totalChevaux = Annonces::where('user_id', $userId)->whereNotNull('horse_id')->count();
+    $totalAnnoncesNonApprv = Annonces::where('user_id', $userId)->where('approuved', false)->count();
+
+    return view('backOffice.statistique', compact('totalAnnonces', 'totalAccessoires', 'totalChevaux', 'totalAnnoncesNonApprv'));
+}
 
 }

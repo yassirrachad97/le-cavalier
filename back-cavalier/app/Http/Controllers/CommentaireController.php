@@ -10,12 +10,6 @@ use Illuminate\Http\Request;
 class CommentaireController extends Controller
 {
 
-    // public function index()
-    // {
-
-    //     $commentaires = Commentaire::paginate(5);
-    //     return view('frentOffice.details', compact('commentaires'));
-    // }
 
 
     public function store(Request $request, $annonceId)
