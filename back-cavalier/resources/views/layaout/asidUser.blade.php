@@ -114,7 +114,7 @@
                                 <span>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
                                 @endauth
                                 @if (Auth::check() && Auth::user()->image)
-                                <img class="roundede-circle mt-5" width="100px" src="{{asset('storage/'.Auth::user()->image)}}"
+                                <img class="roundede-circle mt-5" width="90px" src="{{asset('storage/'.Auth::user()->image)}}"
                                     alt="user photo">
                                     @else
                                     <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"

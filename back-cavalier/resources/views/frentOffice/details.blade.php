@@ -76,7 +76,7 @@
         <div class="bg-light p-30">
             <div class="nav nav-tabs mb-4">
                 <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews ({{ $data['commentaires']->count() }})</a>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-pane-1">
@@ -88,21 +88,29 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4 class="mb-4">Reviews for "{{ $data['annonce']->title }}"</h4>
-                            @if($data['annonce']->commentaires)
-                                @foreach($data['annonce']->commentaires as $commentaire)
+                            @if($data['commentaires']->count() > 0)
+                                @foreach($data['commentaires'] as $commentaire)
                                     <div class="media mb-4">
-                                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        @if ( $commentaire->user->image)
+                                        <img  class="img-fluid mr-3 mt-1" style="width: 45px" src="{{asset('storage/'.Auth::user()->image)}}"
+                                            alt="user photo">
+                                            @else
+                                            <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
+                                                            class="roundede-circle mx-1" width="31" />
+                                            @endif
+
                                         <div class="media-body">
-                                            <h6>{{ $commentaire->user->name }} <small>- <i>{{ $commentaire->created_at->format('d M Y') }}</i></small></h6>
+                                            <h6>{{ $commentaire->user->first_name }} {{ $commentaire->user->last_name }}<small>- <i>{{ $commentaire->created_at->format('d M Y') }}</i></small></h6>
                                             <p>{{ $commentaire->content }}</p>
                                         </div>
                                     </div>
                                 @endforeach
-                                {{ $commentaires->links() }}
+                                {{ $data['commentaires']->links() }}
                             @else
                                 <p>No reviews found for "{{ $data['annonce']->title }}"</p>
                             @endif
                         </div>
+
                         <div class="col-md-12">
                             <h4 class="mb-4">Leave a review</h4>
 
@@ -113,9 +121,7 @@
                                     <label for="content">Your Review *</label>
                                     <textarea id="content" name="content" cols="30" rows="5" class="form-control @error('content') is-invalid @enderror"></textarea>
                                     @error('content')
-                                    <input type="hidden" name="annonce_id" value="{{ $data['annonce']->id }}">
 
-                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
 
                                         <span class="invalid-feedback" role="alert">

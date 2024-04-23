@@ -58,8 +58,11 @@ Route::delete('/annonces/{annonce}',[AnnoncesController::class, 'destroy'])->nam
 Route::get('/annonces/{annonces}/edit',[AnnoncesController::class, 'edit'])->name('annonces.edit');
 Route::put('/annonces/{annonce}', [AnnoncesController::class, 'update'])->name('annonces.update');
 
+Route::put('/annonces/{annonce}/approve', [AnnoncesController::class, 'approve'])->name('annonce.approve');
+Route::get('/aprouvNonAnnonces', [AnnoncesController::class, 'apprveAnnonces'])->name('annonce.NonApprove');
 
-Route::get('/commentaires', [CommentaireController::class, 'index'])->name('commentaires.index');
+
+
 Route::post('/commentaires/{annonceId}', [CommentaireController::class, 'store'])->name('commentaires.store');
 Route::put('/commentaires/{commentId}', [CommentaireController::class, 'update'])->name('commentaires.update');
 Route::delete('/commentaires/{commentId}', [CommentaireController::class, 'delete'])->name('commentaires.delete');

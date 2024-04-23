@@ -10,44 +10,35 @@ use Illuminate\Http\Request;
 class CommentaireController extends Controller
 {
 
-    public function index()
-    {
+    // public function index()
+    // {
 
-        $commentaires = Commentaire::paginate(5);
-        return view('frentOffice.details', compact('commentaires'));
-    }
+    //     $commentaires = Commentaire::paginate(5);
+    //     return view('frentOffice.details', compact('commentaires'));
+    // }
 
 
     public function store(Request $request, $annonceId)
     {
         try {
-            // Vérifier si l'utilisateur est authentifié
-            // if (!auth()->check()) {
-            //     return redirect()->back()->withErrors('You must be logged in to add a comment.');
-            // }
-
-            // Valider le contenu du commentaire
             $request->validate([
                 'content' => 'required|string|max:255',
             ]);
+            if (!auth()->check()) {
+                return redirect()->back()->withWarning("Erreur lors de la création du commentaire. Veuillez vous connecter.");
+            }
 
 
-            // Créer le commentaire dans la base de données
             Commentaire::create([
                 'annonce_id' => $annonceId,
                 'user_id' => auth()->user()->id,
                 'content' => $request->input('content'),
             ]);
-            dd($annonceId);
 
-            // Redirection avec un message de succès
-            return redirect()->back()->withSuccess('Comment added successfully');
-        } catch (QueryException $e) {
-            // Gérer les exceptions liées à la base de données
-            return redirect()->back()->withErrors('An error occurred while adding the comment.');
+            return redirect()->back()->withSuccess('Commentaire ajouté avec succès.');
         } catch (\Exception $e) {
-            // Gérer d'autres exceptions
-            return redirect()->back()->withErrors('An unexpected error occurred.');
+            logger()->error($e->getMessage());
+            return redirect()->back()->withErrors('Une erreur inattendue s\'est produite.');
         }
     }
 

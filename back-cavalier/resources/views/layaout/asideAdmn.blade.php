@@ -119,20 +119,8 @@
                                 <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
                                     class="rounded-circle mx-1" width="31" />
                             </a>
-                    <ul
-                      class="dropdown-menu dropdown-menu-end user-dd animated"
-                      aria-labelledby="navbarDropdown"
-                    >
-                      <a class="dropdown-item" href="javascript:void(0)"
-                        ><i class="mdi mdi-account m-r-5 m-l-5"></i> My Profile</a
-                      >
-                      <a class="dropdown-item" href="javascript:void(0)"
-                        ><i class="mdi mdi-wallet m-r-5 m-l-5"></i> My Balance</a
-                      >
-                      <a class="dropdown-item" href="javascript:void(0)"
-                        ><i class="mdi mdi-email m-r-5 m-l-5"></i> Inbox</a
-                      >
-                    </ul>
+
+
                   </li>
                   <!-- ============================================================== -->
                   <!-- User profile and search -->
@@ -144,37 +132,6 @@
 
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
-            {{-- <div class="scroll-sidebar mt-3">
-
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item ">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('categories.index') }}"
-                                aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu ">categories</span></a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index')}}"
-                                aria-expanded="false"><i class="mdi mdi-account-network"></i><span
-                                    class="hide-menu">utilisateur</span></a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                                <i class="mdi mdi-bell"></i>
-                                <span class="hide-menu">evenements</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
-                                aria-expanded="false"><i class="mdi mdi-file"></i><span
-                                    class="hide-menu">statistiques</span></a>
-                        </li>
-
-                    </ul>
-                </nav>
-
-            </div> --}}
 
         </aside>
 
@@ -207,10 +164,10 @@
                   <li class="sidebar-item">
                     <a
                       class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="table-basic.html"
+                      href="{{ route('annonce.NonApprove') }}"
                       aria-expanded="false"
                       ><i class="mdi mdi-border-all"></i
-                      ><span class="hide-menu">Table</span></a
+                      ><span class="hide-menu">ApprouvNonAnnoce</span></a
                     >
                   </li>
                   <li class="sidebar-item">
@@ -231,14 +188,7 @@
                       ><span class="hide-menu">Articles</span></a
                     >
                   </li>
-                  {{-- <li class="sidebar-item">
-                    <a
-                      class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="error-404.html"
-                      aria-expanded="false"
-                      ><i class="mdi mdi-alert-outline"></i
-                      ><span class="hide-menu">404</span></a
-                    > --}}
+                
                   </li>
                   <li class="text-center p-40 upgrade-btn">
                     <div class="btn d-block w-100 btn-danger text-white"
@@ -260,8 +210,8 @@
 
             @yield('category')
             @yield('user')
-            {{-- @yield('approved')
-            @yield('statistique') --}}
+            @yield('approved')
+            {{-- @yield('statistique') --}}
 
             <div class="container-fluid">
 

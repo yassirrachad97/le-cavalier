@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAnnoncesRequest;
 use App\Models\Accessoires;
 use App\Models\Categories;
 use App\Models\City;
+use App\Models\Commentaire;
 use App\Models\Horses;
 use App\Models\Images;
 use Exception;
@@ -23,7 +24,7 @@ class AnnoncesController extends Controller
 
 
 
-        $annonce = Annonces::paginate(12);
+        $annonce = Annonces::where('approuved', 1)->latest()->paginate(12);
         $categories = Categories::all();
         $city = City::all();
 
@@ -148,15 +149,18 @@ class AnnoncesController extends Controller
 
 public function show(Annonces $annonce)
 {
+
     $detail = null;
     $city = City::all();
     $categories = Categories::all();
+    $commentaires = Commentaire::with('user')->where('annonce_id',$annonce->id)->paginate(5);
     $data = [
         'annonce' => $annonce,
         'categories' => $categories,
         'cities' => $city,
+        'commentaires' => $commentaires,
     ];
-    // dd($data['annonce']);
+
 
 
     if ($annonce->horse_id) {
@@ -259,5 +263,23 @@ public function show(Annonces $annonce)
             return redirect()->back()->withErrors( 'Erreur lors de la suppression de l\'annonce : ');
         }
     }
+
+    public function approve(Annonces $annonce)
+    {
+        $annonce = Annonces::findOrFail($annonce->id);
+
+        $annonce->update(['approuved' => true]);
+
+        return redirect()->back()->withSuccess('Annonce approuvé avec succès.');
+    }
+
+    public function apprveAnnonces()
+{
+        $annoncesNonApprouves = Annonces::where('approuved', false)->get();
+
+
+    return view('backOffice.approuve', compact('annoncesNonApprouves'));
+}
+
 
 }

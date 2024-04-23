@@ -12,7 +12,7 @@
                     alt="user photo">
                     @else
                     <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
-                                    class="rounded-circle mx-1" width="31" />
+                                    class="roundede-circle mx-1"  />
                     @endif
                 <span class="font-weight-bold">{{ $user->first_name }}.{{ $user->last_name }}</span>
                 <span class="text-black-50">{{ $user->email }}</span>

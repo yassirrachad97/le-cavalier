@@ -101,9 +101,7 @@
         </div>
     </div>
 </div>
-<!-- End Modal -->
 
-    <!-- Carousel Start -->
     <div class="container-fluid mb-3">
         <div class="row px-xl-5">
             <div class="col-lg-12">
@@ -155,7 +153,7 @@
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Vous avez un cheval ou des accessoires et vous voulez les vendrais clicker ici</p>
                                     <a id="horseBtn3" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="horse">Horses</a>
                                     <a id="accessoireBtn3" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#" data-toggle="modal" data-target="#addAnnonceModal" data-type="accessoire">Accessoires</a>
-                                  
+
 
                                 </div>
                             </div>
@@ -165,8 +163,7 @@
             </div>
         </div>
     </div>
-    <!-- Carousel End -->
-    <!-- Featured Start -->
+
     <div class="container-fluid pt-5">
         <div class="row px-xl-5 pb-3">
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -199,10 +196,7 @@
             </div>
         </div>
     </div>
-    <!-- Featured End -->
 
-
-    <!-- Categories Start -->
     <div class="container-fluid pt-5">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Categories</span></h2>
         <div class="row px-xl-5 pb-3">
@@ -222,8 +216,7 @@
 
         </div>
     </div>
-    <!-- Categories End -->
-    <!-- Products Start -->
+
     <div class="container-fluid pt-5 pb-3">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">cheveux Annonces</span></h2>
         <div class="row px-xl-5">
@@ -259,38 +252,25 @@
         </div>
     </div>
 
-    <!-- Products End -->
 
-
-    <!-- Offer Start -->
     <div class="container-fluid pt-5 pb-3">
         <div class="row px-xl-5">
+            @foreach($data['annonces_horse']->take(2) as $annonce)
             <div class="col-md-6">
                 <div class="product-offer mb-30" style="height: 300px;">
-                    <img class="img-fluid" src="img/offer-1.jpg" alt="">
+                    <img class="img-fluid" src="{{ asset('storage/'.$annonce->cover) }}" alt="{{ $annonce->title }}">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">derniers annonces</h6>
+                        <h3 class="text-white mb-3">{{ $annonce->title }}</h3>
+                        <a href="{{ route('annonces.details', ['annonce' => $annonce->id]) }}" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="product-offer mb-30" style="height: 300px;">
-                    <img class="img-fluid" src="img/offer-2.jpg" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
-    <!-- Offer End -->
 
 
-    <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Accessoires Annonces</span></h2>
         <div class="row px-xl-5">
@@ -325,7 +305,7 @@
             @endforeach
         </div>
     </div>
-    <!-- Products End -->
+
 
 
     @endsection
