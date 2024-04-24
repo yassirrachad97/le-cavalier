@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\searchController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/inscription', [AuthController::class,'signup'])->name('signup');
-Route::get('/', [AuthController::class,'connexion'])->name('auth.login');
+Route::get('/login', [AuthController::class,'connexion'])->name('auth.login');
 Route::post('/connexion', [AuthController::class,'signin'])->name('signin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
@@ -50,7 +51,7 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 
 
 Route::get('/pageAnnonces', [AnnoncesController::class, 'index'])->name('annonces.index');
-Route::get('/home', [HomeController::class, 'index'])->name('frentOffice.home');
+Route::get('/', [HomeController::class, 'index'])->name('frentOffice.home');
 Route::post('/annonces',[AnnoncesController::class, 'store'])->name('annonces.store');
 Route::get('/annonces/{annonce}', [AnnoncesController::class, 'show'])->name('annonces.details');
 Route::get('/annoncesDashbord', [AnnoncesController::class, 'dashIndex'])->name('annonces.dashIndex');
@@ -72,3 +73,4 @@ Route::get('/search', [searchController::class, 'search'])->name('search');
 
 
 Route::get('/statistiques', [AnnoncesController::class, 'statistiqueUser'])->name('statistiqueUser');
+Route::get('/stats', [StatsController::class, 'showStats'])->name('stats');

@@ -69,13 +69,9 @@
                 id="navbarSupportedContent"
                 data-navbarbg="skin5"
               >
-                <!-- ============================================================== -->
-                <!-- toggle and nav items -->
-                <!-- ============================================================== -->
+
                 <ul class="navbar-nav float-start me-auto">
-                  <!-- ============================================================== -->
-                  <!-- Search -->
-                  <!-- ============================================================== -->
+
                   <li class="nav-item search-box">
                     <a
                       class="nav-link waves-effect waves-dark"
@@ -93,13 +89,9 @@
                     </form>
                   </li>
                 </ul>
-                <!-- ============================================================== -->
-                <!-- Right side toggle and nav items -->
-                <!-- ============================================================== -->
+
                 <ul class="navbar-nav float-end">
-                  <!-- ============================================================== -->
-                  <!-- User profile and search -->
-                  <!-- ============================================================== -->
+
                   <li class="nav-item dropdown">
                     <a class="
                     nav-link
@@ -122,25 +114,23 @@
                                     @endif
                             </a>
                   </li>
-                  <!-- ============================================================== -->
-                  <!-- User profile and search -->
-                  <!-- ============================================================== -->
+
                 </ul>
               </div>
             </nav>
         </header>
 
         <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
+
 
         </aside>
 
 
         <br>
         <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
+
             <div class="scroll-sidebar">
-              <!-- Sidebar navigation-->
+
               <nav class="sidebar-nav">
                 <ul id="sidebarnav">
                   <li class="sidebar-item">
@@ -166,7 +156,7 @@
                         class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="{{ route('statistiqueUser') }}"
                         aria-expanded="false"
-                        ><i class="mdi mdi-border-all"></i
+                        ><i class="mdi mdi-file"></i
                         ><span class="hide-menu">Statistiques</span></a
                         >
                   <li class="text-center p-40 upgrade-btn">
@@ -180,9 +170,9 @@
                   </li>
                 </ul>
               </nav>
-              <!-- End Sidebar navigation -->
+
             </div>
-            <!-- End Sidebar scroll-->
+
           </aside>
 
         <div class="page-wrapper">
@@ -205,39 +195,39 @@
     </div>
 
     <script src="{{ asset('dashstyle/js/vendor/modernizr-3.5.0.min.js') }}"></script>
-    <!-- Jquery, Popper, Bootstrap -->
+
     <script src="{{ asset('dashstyle/js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('dashstyle/js/popper.min.js')}}"></script>
     <script src="{{ asset('dashstyle/js/bootstrap.min.js')}}"></script>
-    <!-- Jquery Mobile Menu -->
+
     <script src="{{ asset('dashstyle/js/jquery.slicknav.min.js')}}"></script>
 
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
+
     <script src="{{ asset('dashstyle/js/owl.carousel.min.js')}}"></script>
     <script src="{{ asset('dashstyle/js/slick.min.js')}}"></script>
-    <!-- One Page, Animated-HeadLin -->
+
     <script src="{{ asset('dashstyle/js/wow.min.js')}}"></script>
     <script src="{{ asset('dashstyle/js/animated.headline.js')}}"></script>
     <script src="{{ asset('dashstyle/js/jquery.magnific-popup.js')}}"></script>
 
-    <!-- Date Picker -->
+
     <script src="{{ asset('dashstyle/js/gijgo.min.js')}}"></script>
-    <!-- Nice-select, sticky -->
+
     <script src="{{ asset('dashstyle/js/jquery.nice-select.min.js')}}"></script>
     <script src="{{ asset('dashstyle/js/jquery.sticky.js')}}"></script>
 
-    <!-- counter , waypoint -->
+
     <script src="{{ asset('dashstyle/js/jquery.counterup.min.js')}}"></script>
     <script src="{{ asset('dashstyle/js/waypoints.min.js')}}"></script>
     <script src="{{ asset('dashstyle/js/jquery.countdown.min.js')}}"></script>
-    <!-- contact js -->
+
     <script src="{{ asset('dashstyle/js/contact.js')}}"></script>
     <script src="{{ asset('dashstyle/js/jquery.form.js')}}"></script>
     <script src="{{ asset('dashstyle/js/jquery.validate.min.js')}}"></script>
     <script src="{{ asset('dashstyle/js/mail-script.js')}}"></script>
     <script src="{{ asset('dashstyle/js/jquery.ajaxchimp.min.js')}}"></script>
 
-    <!-- Jquery Plugins, main Jquery -->
+  
     <script src="{{ asset('dashstyle/js/plugins.js')}}"></script>
     <script src="{{ asset('dashstyle/js/main.js')}}"></script>
 

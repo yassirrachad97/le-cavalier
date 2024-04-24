@@ -78,7 +78,11 @@
                                     @if ($data['commentaires']->count() > 0)
                                         @foreach ($data['commentaires'] as $commentaire)
                                             <div class="media mb-4">
-                                                <img class="img-fluid mr-3 mt-1" style="width: 45px" src="{{ asset('storage/'.$commentaire->user->image) }}" alt="user photo">
+                                                @if ($commentaire->user->image)
+                                                    <img class="img-fluid mr-3 mt-1" style="width: 45px" src="{{ asset('storage/' . $commentaire->user->image) }}" alt="user photo">
+                                                @else
+                                                    <img class="img-fluid mr-3 mt-1" style="width: 45px" src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user photo">
+                                              @endif
 
 
                                                 <div class="media-body">
