@@ -19,13 +19,13 @@ class UserController extends Controller
         $user= User::find($id);
         $user->is_blocked = !$user->is_blocked;
         $user->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'user bloqué avec succès.');
     }
     public function changeRole(Request $request)
     {
         $user = User::findOrFail($request->user);
         $user->update(['role_id' => $request->role]);
-        return redirect()->back()->with('success', 'Événement approuvé avec succès.');
+        return redirect()->back()->with('success', 'user_role changer avec succès.');
     }
 
 

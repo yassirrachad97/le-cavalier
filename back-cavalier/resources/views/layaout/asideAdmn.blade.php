@@ -165,7 +165,7 @@
                   <li class="sidebar-item">
                     <a
                       class="sidebar-link waves-effect waves-dark sidebar-link"
-                      href="starter-kit.html"
+                      href="{{ route('articles.index') }}"
                       aria-expanded="false"
                       ><i class="mdi mdi-bookmark"></i
                       ><span class="hide-menu">Articles</span></a>
