@@ -102,8 +102,13 @@
                                 @auth
                                 <span>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
                                 @endauth
-                                <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
-                                    class="rounded-circle mx-1" width="31" />
+                                @if (Auth::check() && Auth::user()->image)
+                                <img class="rounded-circle mt-5" width="90px" src="{{asset('storage/'.Auth::user()->image)}}"
+                                    alt="user photo">
+                                    @else
+                                    <img src="{{ asset('dashstyle/images/users/profile.png') }}" alt="user"
+                                                    class="roundede-circle mx-1" width="31" />
+                                    @endif
                             </a>
 
 
@@ -127,6 +132,7 @@
 
               <nav class="sidebar-nav">
                 <ul id="sidebarnav">
+                   
                   <li class="sidebar-item">
                     <a
                       class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -188,7 +194,7 @@
           </aside>
 
         <div class="page-wrapper">
-
+            @yield('EditeProfil')
             @yield('category')
             @yield('user')
             @yield('approved')

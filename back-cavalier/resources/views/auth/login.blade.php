@@ -20,10 +20,10 @@
 @endif
 
 <div class="containerr">
-    <div class="flex-containerr">
+    <a href="{{ route('frentOffice.home') }}" class="flex-containerr">
         <img src="{{ asset('styyle/img/tbourida-4.png') }}" alt="logo" class="rounded-circle" width="80" />
         <h2 class="titlee">Le Cavalier</h2>
-    </div>
+    </a>
 </div>
     <div class="container" id="container">
         <div class="form-container sign-up-container">

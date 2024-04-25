@@ -77,6 +77,7 @@ class AuthController extends Controller
     }
     public function EditeProfil(Request $request)
     {
+        
          $user = Auth::user();
         return view('backOffice.Profile', compact('user'));
     }
@@ -84,15 +85,7 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        // $request->validate([
-        //     'first_name' => 'required|string|min:2|max:12',
-        //     'last_name' =>  'required|string|min:2|max:12',
-        //     'email' => 'required|email|unique:users,email,' . $user->id,
-        //     'password' => 'nullable|min:6',
-        //     'password_confirmation' => 'nullable|same:password',
-        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'phone' => 'required|string|unique:users,phone',
-        // ]);
+
 
 
         $user->first_name = $request->input("first_name");

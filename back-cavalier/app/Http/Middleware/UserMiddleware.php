@@ -21,6 +21,6 @@ class UserMiddleware
         }
 
         // L'utilisateur n'est pas connecté ou n'a pas le rôle approprié, rediriger vers la page de connexion
-        return redirect('/login');
+        return redirect('/login')->withErrors('message', 'Vous n\'avez pas les autorisations nécessaires pour accéder à cette page.');
     }
 }

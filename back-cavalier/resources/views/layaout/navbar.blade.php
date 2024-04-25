@@ -99,7 +99,7 @@
                <div class="navbar-nav w-100">
                    <select class="form-select" id="categoryFilter" onchange="filter()">
                        <option value="all">Toutes les catégories</option>
-                       @foreach ($data['categories'] as $category)
+                       @foreach ($categories as $category)
                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                        @endforeach
                    </select>
@@ -121,8 +121,8 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Articles <i
                                         class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    @foreach ($data['cate'] as $article)
-                                    <a href="{{ route('article.details', $article->id) }}" class="dropdown-item">{{ $category->name }}</a>
+                                    @foreach ($articles as $article)
+                                    <a href="{{ route('article.details', $article->id) }}" class="dropdown-item">{{ $article->titre }}</a>
                                     @endforeach
                                 </div>
                             </div>

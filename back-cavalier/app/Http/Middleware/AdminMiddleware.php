@@ -21,6 +21,6 @@ class AdminMiddleware
         }
 
         // L'utilisateur n'est pas un administrateur, rediriger vers une page appropriée
-        return redirect('/error')->with('message', 'Vous n\'avez pas les autorisations nécessaires pour accéder à cette page.');
+        return redirect('/login')->withErrors('message', 'Vous n\'avez pas les autorisations nécessaires pour accéder à cette page.');
     }
 }
